@@ -1,0 +1,133 @@
+{
+    "dados_pessoais": {
+        "nome": "",
+        "endereco": "",
+        "cep": "",
+        "email": "",
+        "cpf": "",
+        "rg": "",
+        "idade": "",
+        "tel_fixo": "",
+        "tel_celular": "",
+        "tel_trabalho": "",
+        "contatoEmergencia": ""
+    },
+    "informacoes_religiosas": {
+        "inicio_data": "",
+        "inicio_local": "",
+        "casa_caridade_inicio": "",
+        "casa_caridade_termino": "",
+        "casa_caridade_observacoes": "",
+        "desenvolvimento_inicio": "",
+        "desenvolvimento_termino": "",
+        "inicioAtendimento": "",
+        "batismoUmbanda": "",
+        "cambone_experiencia": false,
+        "cambone_dataInicio": "",
+        "cambone_dataTermino": ""
+    },
+    "formacao_sacerdotal": {
+        "teologia_inicio": "",
+        "teologia_termino": "",
+        "sacerdocio_inicio": "",
+        "sacerdocio_termino": ""
+    },
+    "coroacao": {
+        "inicio": "",
+        "final": "",
+        "guia_coroacao": "",
+        "sacerdote_coroacao": "",
+        "terreiro": ""
+    },
+    "orixas": {
+        "ancestre": "",
+        "frente": "",
+        "ajunto": "",
+        "andamJunto": [],
+        "ladoEsquerdo": "",
+        "ladoDireito": ""
+    },
+    "cruzForca": {
+        "alto": "",
+        "baixo": "",
+        "esquerdo": "",
+        "direito": ""
+    },
+    "cruzamentos": [
+        {
+            "entidade": "",
+            "data": "",
+            "finalidade": ""
+        }
+    ],
+    "guias_trabalho": {
+        "caboclo": "",
+        "cabocla": "",
+        "ogum": "",
+        "xango": "",
+        "baiano": "",
+        "baiana": "",
+        "pretoVelho": "",
+        "pretaVelha": "",
+        "boiadeiro": "",
+        "boiadeira": "",
+        "cigano": "",
+        "cigana": "",
+        "marinheiro": "",
+        "ere": "",
+        "exu": "",
+        "pombagira": "",
+        "exu_mirim": ""
+    },
+    "cursos_religiosos": [
+        {
+            "nome": "",
+            "data": "",
+            "finalizado": false
+        }
+    ],
+    "misterios_iniciados": [
+        {
+            "nome": "",
+            "data": "",
+            "concluido": false,
+            "observacoes": ""
+        }
+    ],
+    "orixas_iniciados": [
+        {
+            "nome": "",
+            "iniciado": false,
+            "observacoes": ""
+        }
+    ],
+    "magias_divinas": [
+        {
+            "tipo": "",
+            "data": "",
+            "realizada": false,
+            "observacoes": ""
+        }
+    ],
+    "consagracoes_entidades": [
+        {
+            "entidade": "",
+            "data": "",
+            "nome": ""
+        }
+    ],
+    "amaci": [
+        {
+            "tipo": "",
+            "data": "",
+            "observacoes": ""
+        }
+    ],
+    "ultimo_templo": {
+        "nome": "",
+        "endereco": "",
+        "dirigente": "",
+        "funcao": "",
+        "motivoSaida": ""
+    }
+}
