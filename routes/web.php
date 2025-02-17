@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MeusDadosController;
 
 Route::view('/', 'welcome');
 
@@ -12,4 +13,8 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+Route::get('/meus-dados', [MeusDadosController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('meus-dados');
+
+require __DIR__ . '/auth.php';

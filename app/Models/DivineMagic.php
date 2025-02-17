@@ -10,41 +10,25 @@ class DivineMagic extends Model
 {
     use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'divine_magics';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'user_id',
-        'type',
+        'magic_type_id',
         'date',
         'performed',
         'observations'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        'date' => 'date',
         'performed' => 'boolean'
     ];
 
-    /**
-     * Get the user that owns the divine magic.
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function magicType(): BelongsTo
+    {
+        return $this->belongsTo(MagicType::class);
     }
 }

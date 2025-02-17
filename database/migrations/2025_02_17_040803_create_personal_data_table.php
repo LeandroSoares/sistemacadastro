@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('address');
             $table->string('zip_code');
             $table->string('email');
-            $table->string('cpf');
-            $table->string('rg');
+            $table->string('cpf')->nullable();
+            $table->string('rg')->nullable();
             $table->integer('age');
             $table->string('home_phone')->nullable();
             $table->string('mobile_phone');
             $table->string('work_phone')->nullable();
-            $table->string('emergency_contact');
+            $table->string('emergency_contact')->nullable();
             $table->timestamps();
         });
     }

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('last_temples', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('leader_name')->nullable();
+            $table->string('function')->nullable();
+            $table->string('exit_reason')->nullable();
             $table->timestamps();
         });
     }

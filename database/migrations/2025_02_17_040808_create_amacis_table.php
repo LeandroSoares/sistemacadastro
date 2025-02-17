@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('amacis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('type')->nullable(); // Nome específico
+            $table->string('observations')->nullable(); // Nome/tipo da entidade
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

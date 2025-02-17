@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('top');
-    $table->string('bottom');
-    $table->string('left');
-    $table->string('right');
+            $table->string('bottom');
+            $table->string('left');
+            $table->string('right');
             $table->timestamps();
         });
     }

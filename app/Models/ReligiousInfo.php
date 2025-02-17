@@ -15,7 +15,7 @@ class ReligiousInfo extends Model
      *
      * @var string
      */
-    protected $table = 'religious_info';
+    protected $table = 'religious_infos';
 
     /**
      * The attributes that are mass assignable.
@@ -44,16 +44,8 @@ class ReligiousInfo extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'start_date' => 'date',
-        'charity_house_start' => 'date',
-        'charity_house_end' => 'date',
-        'development_start' => 'date',
-        'development_end' => 'date',
-        'service_start' => 'date',
-        'umbanda_baptism' => 'date',
+
         'cambone_experience' => 'boolean',
-        'cambone_start_date' => 'date',
-        'cambone_end_date' => 'date'
     ];
 
     /**

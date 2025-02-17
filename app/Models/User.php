@@ -67,9 +67,9 @@ class User extends Authenticatable
         return $this->hasOne(Crowning::class);
     }
 
-    public function orisha(): HasOne
+    public function headOrisha(): HasOne
     {
-        return $this->hasOne(Orisha::class);
+        return $this->hasOne(HeadOrisha::class);
     }
 
     public function forceCross(): HasOne

@@ -29,14 +29,7 @@ class Crossing extends Model
         'purpose'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'date' => 'date',
-    ];
+  
 
     /**
      * Get the user that owns the crossing.

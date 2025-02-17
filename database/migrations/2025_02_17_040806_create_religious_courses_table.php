@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('religious_courses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('course_id')->constrained();
+            $table->date('date')->nullable();  // Data do curso
+            $table->boolean('finished')->default(false);  // Status de finalização (Sim/Não)
             $table->timestamps();
         });
     }

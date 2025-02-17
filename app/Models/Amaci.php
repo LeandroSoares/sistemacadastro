@@ -29,14 +29,6 @@ class Amaci extends Model
         'observations'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'date' => 'date',
-    ];
 
     /**
      * Get the user that owns the amaci.

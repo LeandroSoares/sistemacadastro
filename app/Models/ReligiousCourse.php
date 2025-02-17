@@ -24,7 +24,7 @@ class ReligiousCourse extends Model
      */
     protected $fillable = [
         'user_id',
-        'name',
+        'course_id',
         'date',
         'finished'
     ];
@@ -35,7 +35,6 @@ class ReligiousCourse extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'date' => 'date',
         'finished' => 'boolean'
     ];
 
@@ -45,5 +44,9 @@ class ReligiousCourse extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
     }
 }

@@ -32,6 +32,20 @@ class LastTemple extends Model
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'user_id' => 'integer',
+        'name' => 'string',
+        'address' => 'string',
+        'leader_name' => 'string',
+        'function' => 'string',
+        'exit_reason' => 'string'
+    ];
+
+    /**
      * Get the user that owns the last temple record.
      */
     public function user(): BelongsTo

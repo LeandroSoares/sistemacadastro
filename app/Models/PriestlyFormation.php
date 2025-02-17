@@ -30,17 +30,6 @@ class PriestlyFormation extends Model
         'priesthood_end'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'theology_start' => 'date',
-        'theology_end' => 'date',
-        'priesthood_start' => 'date',
-        'priesthood_end' => 'date'
-    ];
 
     /**
      * Get the user that owns the priestly formation.

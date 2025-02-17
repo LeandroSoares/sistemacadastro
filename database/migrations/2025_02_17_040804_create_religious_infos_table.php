@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('religious_infos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->date('start_date');
-            $table->string('start_location');
-            $table->date('charity_house_start');
+            $table->date('start_date')->nullable();
+            $table->string('start_location')->nullable();
+            $table->date('charity_house_start')->nullable();
             $table->date('charity_house_end')->nullable();
             $table->text('charity_house_observations')->nullable();
-            $table->date('development_start');
+            $table->date('development_start')->nullable();
             $table->date('development_end')->nullable();
-            $table->date('service_start');
-            $table->date('umbanda_baptism');
+            $table->date('service_start')->nullable();
+            $table->date('umbanda_baptism')->nullable();
             $table->boolean('cambone_experience')->default(false);
             $table->date('cambone_start_date')->nullable();
             $table->date('cambone_end_date')->nullable();

@@ -10,41 +10,25 @@ class InitiatedMystery extends Model
 {
     use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'initiated_mysteries';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'user_id',
-        'name',
+        'mystery_id',
         'date',
         'completed',
         'observations'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        'date' => 'date',
         'completed' => 'boolean'
     ];
 
-    /**
-     * Get the user that owns the initiated mystery.
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function mystery(): BelongsTo
+    {
+        return $this->belongsTo(Mystery::class);
     }
 }

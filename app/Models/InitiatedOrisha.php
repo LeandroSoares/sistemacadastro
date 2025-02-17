@@ -24,7 +24,7 @@ class InitiatedOrisha extends Model
      */
     protected $fillable = [
         'user_id',
-        'name',
+        'orisha_id',
         'initiated',
         'observations'
     ];
@@ -44,5 +44,10 @@ class InitiatedOrisha extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function orisha(): BelongsTo
+    {
+        return $this->belongsTo(Orisha::class);
     }
 }

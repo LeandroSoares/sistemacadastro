@@ -29,14 +29,7 @@ class EntityConsecration extends Model
         'name'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'date' => 'date'
-    ];
+  
 
     /**
      * Get the user that owns the entity consecration.

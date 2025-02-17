@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('initiated_mysteries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('mystery_id')->constrained();
+            $table->date('date')->nullable();
+            $table->boolean('completed')->default(false);
+            $table->text('observations')->nullable();
             $table->timestamps();
         });
     }
