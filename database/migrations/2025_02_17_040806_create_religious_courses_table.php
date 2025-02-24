@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained();
             $table->date('date')->nullable();  // Data do curso
             $table->boolean('finished')->default(false);  // Status de finalização (Sim/Não)
+            $table->boolean('has_initiation')->default(false); // Indica se tem iniciação
+            $table->date('initiation_date')->nullable(); // Data da iniciação
+            $table->text('observations')->nullable(); // Campo para observações
             $table->timestamps();
         });
     }

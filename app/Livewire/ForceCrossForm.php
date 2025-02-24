@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\ForceCross;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class ForceCrossForm extends Component
 {
@@ -21,15 +22,9 @@ class ForceCrossForm extends Component
         'right' => 'nullable|string|max:255'
     ];
 
-    protected $messages = [
-        'top.max' => 'O campo superior não pode ter mais que 255 caracteres',
-        'bottom.max' => 'O campo inferior não pode ter mais que 255 caracteres',
-        'left.max' => 'O campo esquerdo não pode ter mais que 255 caracteres',
-        'right.max' => 'O campo direito não pode ter mais que 255 caracteres'
-    ];
-
     public function mount(User $user)
     {
+
         $this->user = $user;
 
         if ($user->forceCross) {
@@ -44,12 +39,21 @@ class ForceCrossForm extends Component
     {
         $validatedData = $this->validate();
 
-        $this->user->forceCross()->updateOrCreate(
-            ['user_id' => $this->user->id],
-            $validatedData
-        );
+        try {
+            $this->user->forceCross()->updateOrCreate(
+                ['user_id' => $this->user->id],
+                [
+                    'top' => $validatedData['top'],
+                    'bottom' => $validatedData['bottom'],
+                    'left' => $validatedData['left'],
+                    'right' => $validatedData['right']
+                ]
+            );
 
-        session()->flash('message', 'Cruz de força salva com sucesso.');
+            session()->flash('message', 'Cruz de força salva com sucesso.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Erro ao salvar a cruz de força.');
+        }
     }
 
     public function render()

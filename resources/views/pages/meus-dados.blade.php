@@ -17,7 +17,7 @@
             <br>
             <livewire:head-orisha-form :user="$user" />
             <br>
-            <livewire:force-cross-form />
+            <livewire:force-cross-form :user="$user" />
             <br>
             <livewire:crossing-form :user="$user" />
             <br>

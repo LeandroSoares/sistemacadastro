@@ -33,7 +33,7 @@
             </div>
 
             <div class="col-span-2">
-                <label class="block text-sm font-medium text-gray-700">Observações da Casa de Caridade</label>
+                <label class="block text-sm font-medium text-gray-700">Observações</label>
                 <textarea wire:model="charity_house_observations" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
                 @error('charity_house_observations') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>

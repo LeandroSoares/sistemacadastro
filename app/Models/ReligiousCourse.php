@@ -26,7 +26,10 @@ class ReligiousCourse extends Model
         'user_id',
         'course_id',
         'date',
-        'finished'
+        'finished',
+        'has_initiation',
+        'initiation_date',
+        'observations'
     ];
 
     /**
