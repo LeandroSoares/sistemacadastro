@@ -1,0 +1,16 @@
+stages:
+  - sast
+
+sast:
+  stage: sast
+  image: php:7.4
+  script:
+    - apt-get update && apt-get install -y git
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - vendor/bin/phpcs --standard=PSR2 src/
+    - vendor/bin/phpstan analyse src/
+  artifacts:
+    paths:
+      - gl-sast-report.json
+  allow_failure: false
