@@ -27,11 +27,11 @@
                                 Login
                             </a>
 
-                            @if (Route::has('register'))
+                            <!-- @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="ms-2 rounded-md px-2 py-1 text-sm text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80">
                                     Register
                                 </a>
-                            @endif
+                            @endif -->
                         @endauth
                     </nav>
                 @endif

@@ -42,7 +42,7 @@ Route::prefix('courses')->middleware(['auth'])->group(function () {
     Route::get('/', [CourseController::class, 'index'])->name('courses.index');
 
     // Rotas de gerenciamento - apenas admin e manager
-    Route::group(['middleware' => ['role:admin|manager']], function () {
+    Route::group(['middleware' => ['can:delete users']], function () {
         Route::get('/create', [CourseController::class, 'create'])->name('courses.create');
         Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
     });
