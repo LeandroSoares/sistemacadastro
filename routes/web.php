@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MeusDadosController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CourseController;
 
 Route::view('/', 'welcome');
 
@@ -32,6 +33,18 @@ Route::prefix('users')->middleware(['web', 'auth'])->group(function () {
     // Rota de exclusão - apenas admin
     Route::group(['middleware' => ['auth', 'can:delete users']], function () {
         Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
+});
+
+// Rotas para gerenciamento de cursos
+Route::prefix('courses')->middleware(['auth'])->group(function () {
+    // Rota de visualização - acessível por todos
+    Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+
+    // Rotas de gerenciamento - apenas admin e manager
+    Route::group(['middleware' => ['role:admin|manager']], function () {
+        Route::get('/create', [CourseController::class, 'create'])->name('courses.create');
+        Route::get('/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
     });
 });
 

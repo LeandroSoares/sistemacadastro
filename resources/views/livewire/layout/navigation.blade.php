@@ -12,19 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('meus-dados')" :active="request()->routeIs('meus-dados')" wire:navigate>
-                        {{ __('Meus Dados') }}
-                    </x-nav-link>
-
-                    @if($user && $user->hasAnyRole(['admin', 'manager']))
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" wire:navigate>
-                            {{ __('Gestão de Usuários') }}
+                    @foreach($route_list as $route)
+                        <x-nav-link :href="route($route)" :active="request()->routeIs($route.'*')" wire:navigate>
+                            {{ __($route) }}
                         </x-nav-link>
-                    @endif
+                    @endforeach
                 </div>
             </div>
 
@@ -73,19 +65,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('meus-dados')" :active="request()->routeIs('meus-dados')" wire:navigate>
-                {{ __('Meus Dados') }}
-            </x-responsive-nav-link>
-
-            @if($user && $user->hasAnyRole(['admin', 'manager']))
-                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" wire:navigate>
-                    {{ __('Gestão de Usuários') }}
+            @foreach($route_list as $route)
+                <x-responsive-nav-link :href="route($route)" :active="request()->routeIs($route.'*')" wire:navigate>
+                    {{ __($route) }}
                 </x-responsive-nav-link>
-            @endif
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->

@@ -25,6 +25,10 @@
                             {{ __('Gestão de Usuários') }}
                         </x-nav-link>
                     @endif
+
+                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
+                        {{ __('Courses') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -90,6 +94,10 @@
                     {{ __('Gestão de Usuários') }}
                 </x-responsive-nav-link>
             @endif
+
+            <x-responsive-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
+                {{ __('Courses') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

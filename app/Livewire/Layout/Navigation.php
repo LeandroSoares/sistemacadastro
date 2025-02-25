@@ -18,14 +18,14 @@ class Navigation extends Component
 
     public function render()
     {
-        $route_list = ['dashboard', 'meus-dados'];
+        $route_list = ['dashboard', 'meus-dados','courses.index'];
         /** @var User */
         $user = Auth::user();
         
         if ($user && $user->hasAnyRole(['admin', 'manager'])) {
             $route_list[] = 'users.index';
         }
-        
+
         return view('livewire.layout.navigation', [
             'route_list' => $route_list,
             'user' => $user
