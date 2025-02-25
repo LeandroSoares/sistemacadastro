@@ -14,3 +14,5 @@ sast:
     paths:
       - gl-sast-report.json
   allow_failure: false
+  only:
+    - main
