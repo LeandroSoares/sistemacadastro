@@ -1,0 +1,14 @@
+{
+    "The password field must be at least 8 characters.": "A senha deve ter pelo menos 8 caracteres.",
+    "The password confirmation does not match.": "A confirmação de senha não corresponde.",
+    "The password field confirmation does not match.": "A confirmação de senha não corresponde.",
+    "The password field is required.": "O campo senha é obrigatório.",
+    "The name field is required.": "O campo nome é obrigatório.",
+    "The email field is required.": "O campo email é obrigatório.",
+    "The email has already been taken.": "Este email já está em uso.",
+    "The email must be a valid email address.": "O email deve ser um endereço válido.",
+    "validation.min.string": "O campo :attribute deve ter pelo menos :min caracteres.",
+    "admin": "Administrador",
+    "manager": "Gerente",
+    "user": "Usuário"
+} 
