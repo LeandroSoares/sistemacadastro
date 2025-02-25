@@ -3,7 +3,7 @@ stages:
 
 sast:
   stage: sast
-  image: php:7.4
+  image: php:8.1
   script:
     - apt-get update && apt-get install -y git
     - curl -sS https://getcomposer.org/installer | php
