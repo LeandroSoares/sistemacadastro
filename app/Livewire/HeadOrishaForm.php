@@ -25,8 +25,7 @@ class HeadOrishaForm extends Component
     {
         $this->user = $user;
         $this->sacredOrishas = Orisha::where('active', true)
-            ->where('is_right', true)
-            ->orderBy('name')
+            // ->where('is_right', true)
             ->get();
         
         if ($user->orisha) {

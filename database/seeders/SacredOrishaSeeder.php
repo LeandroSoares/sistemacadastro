@@ -133,6 +133,13 @@ class SacredOrishaSeeder extends Seeder
                 'active' => true
             ],
             [
+                'name' => 'Bombagira Mirim',
+                'description' => 'Orixá da alegria infantil e da pureza',
+                'is_right' => false,
+                'is_left' => true,
+                'active' => true
+            ],
+            [
                 'name' => 'Exu do Fogo',
                 'description' => 'Orixá do fogo e da transformação',
                 'is_right' => false,

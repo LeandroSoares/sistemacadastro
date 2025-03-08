@@ -41,5 +41,7 @@
     "dashboard": "Dashboard",
     "meus-dados": "Meus Dados",
     "users.index": "Gestão de Usuários",
-    "courses.index": "Cursos"
+    "courses.index": "Cursos",
+    "orishas.index": "Orixás",
+    "home": "Home"
 } 

@@ -18,10 +18,10 @@ class Navigation extends Component
 
     public function render()
     {
-        $route_list = ['dashboard', 'meus-dados','courses.index'];
+        $route_list = ['home', 'meus-dados', 'courses.index', 'orishas.index'];
         /** @var User */
         $user = Auth::user();
-        
+
         if ($user && $user->hasAnyRole(['admin', 'manager'])) {
             $route_list[] = 'users.index';
         }

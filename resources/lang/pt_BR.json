@@ -15,7 +15,7 @@
     "caboclo": "Caboclo",
     "cambone_end_date": "Data de término como cambone",
     "cambone_start_date": "Data de início como cambone",
-    "cellphone_number": "Telefone celular", 
+    "cellphone_number": "Telefone celular",
     "cep": "CEP",
     "charity_house_end_date": "Data de término na Casa de Caridade",
     "charity_house_notes": "Anotações sobre a Casa de Caridade",
@@ -101,5 +101,8 @@
     "yes": "sim",
     "Yes": "Sim",
     "courses.index": "Cursos",
-    "users.index": "Usuários"
+    "orishas.index": "Orishas",
+    "home": "Home",
+    "users.index": "Usuários",
+    "You're logged in!": "Você está logado!"
 }

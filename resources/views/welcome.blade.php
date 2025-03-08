@@ -19,8 +19,8 @@
                 @if (Route::has('login'))
                     <nav class="flex justify-end">
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="rounded-md px-2 py-1 text-sm text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80">
-                                Dashboard
+                            <a href="{{ url('/home') }}" class="rounded-md px-2 py-1 text-sm text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80">
+                                Home
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="rounded-md px-2 py-1 text-sm text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80">

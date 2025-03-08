@@ -17,36 +17,53 @@ class RoleSeeder extends Seeder
         $user = Role::create(['name' => 'user']);
 
         // Criar permissões básicas
-        Permission::create(['name' => 'manage users']);
+        Permission::create(['name' => 'view users']);
         Permission::create(['name' => 'create users']);
         Permission::create(['name' => 'edit users']);
         Permission::create(['name' => 'delete users']);
-        Permission::create(['name' => 'view users']);
 
-        Permission::create(['name' => 'manage courses']);
+        Permission::create(['name' => 'view courses']);
         Permission::create(['name' => 'create courses']);
         Permission::create(['name' => 'edit courses']);
         Permission::create(['name' => 'delete courses']);
-        Permission::create(['name' => 'view courses']);
+
+        // Adicionar permissões para Orishas
+        Permission::create(['name' => 'view orishas']);
+        Permission::create(['name' => 'create orishas']);
+        Permission::create(['name' => 'edit orishas']);
+        Permission::create(['name' => 'delete orishas']);
 
         // Atribuir permissões às funções
         $admin->givePermissionTo([
-            'manage users',
+            'view users',
             'create users',
             'edit users',
             'delete users',
-            'view users'
+            'view courses',
+            'create courses',
+            'edit courses',
+            'delete courses',
+            'view orishas',
+            'create orishas',
+            'edit orishas',
+            'delete orishas'
         ]);
 
         $manager->givePermissionTo([
-            'manage users',
+            'view users',
             'create users',
             'edit users',
-            'view users'
+            'view courses',
+            'create courses',
+            'edit courses',
+            'view orishas',
+            'create orishas',
+            'edit orishas'
         ]);
 
         $user->givePermissionTo([
-            'view courses'
+            'view courses',
+            'view orishas'
         ]);
     }
 }
