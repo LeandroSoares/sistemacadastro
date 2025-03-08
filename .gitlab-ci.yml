@@ -14,10 +14,11 @@ cache:
 stages:
   - test
   - deploy
+
 .config:
-  image: edbizarro/gitlab-ci-pipeline-php:latest
+  image: lorisleiva/laravel-docker:8.2
   services:
-    - mysql:latest
+    - mysql:8.0
   before_script:
     # Install Node dependencies.
     - npm install
