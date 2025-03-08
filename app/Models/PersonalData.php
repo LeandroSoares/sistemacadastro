@@ -31,7 +31,7 @@ class PersonalData extends Model
         'email',
         'cpf',
         'rg',
-        'age',
+        'birth_date',
         'home_phone',
         'mobile_phone',
         'work_phone',
@@ -44,7 +44,7 @@ class PersonalData extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'age' => 'integer'
+        'birth_date' => 'date'
     ];
 
     /**
@@ -64,7 +64,7 @@ class PersonalData extends Model
             'email' => 15,
             'cpf' => 15,
             'rg' => 10,
-            'age' => 10,
+            'birth_date' => 10,
             'mobile_phone' => 10
         ]);
     }

@@ -27,7 +27,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'edit courses']);
         Permission::create(['name' => 'delete courses']);
 
-        // Adicionar permissões para Orishas
+        // Adicionar permissões para Orixas
         Permission::create(['name' => 'view orishas']);
         Permission::create(['name' => 'create orishas']);
         Permission::create(['name' => 'edit orishas']);

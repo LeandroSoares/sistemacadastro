@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center  block w-16 h-16 fill-current">
-                    <a href="{{ route('home') }}" wire:navigate>
+                    <a href="{{ route('home') }}" >
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -13,8 +13,8 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @foreach($route_list as $route)
-                        <x-nav-link :href="route($route)" :active="request()->routeIs($route.'*')" wire:navigate>
-                            {{ __($route) }}
+                        <x-nav-link :href="route($route)" :active="request()->routeIs($route.'*')" >
+                            {{ trans($route) }}  
                         </x-nav-link>
                     @endforeach
                 </div>
@@ -36,7 +36,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                        <x-dropdown-link :href="route('profile')" >
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -66,7 +66,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @foreach($route_list as $route)
-                <x-responsive-nav-link :href="route($route)" :active="request()->routeIs($route.'*')" wire:navigate>
+                <x-responsive-nav-link :href="route($route)" :active="request()->routeIs($route.'*')" >
                     {{ __($route) }}
                 </x-responsive-nav-link>
             @endforeach
@@ -80,7 +80,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                <x-responsive-nav-link :href="route('profile')" >
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 

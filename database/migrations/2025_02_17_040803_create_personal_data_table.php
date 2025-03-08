@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('cpf')->nullable();
             $table->string('rg')->nullable();
-            $table->integer('age');
+            $table->date('birth_date');
             $table->string('home_phone')->nullable();
             $table->string('mobile_phone');
             $table->string('work_phone')->nullable();

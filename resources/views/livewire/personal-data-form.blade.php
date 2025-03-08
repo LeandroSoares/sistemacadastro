@@ -45,10 +45,10 @@
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">Idade</label>
-                <input type="number" wire:model="age" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                @error('age') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-            </div>
+                <label class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                <input type="date" wire:model="birth_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                @error('birth_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+            </div> 
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Telefone Fixo</label>

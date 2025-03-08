@@ -37,7 +37,7 @@
                 <span class="text-sm text-gray-600 whitespace-nowrap">{{ $progress }}%</span>
             </div>
         </div>
-        <div class="flex justify-center gap-4 mt-2 text-xs">
+        {{-- <div class="flex justify-center gap-4 mt-2 text-xs">
             @foreach($detailedProgress as $section)
                 <div class="flex items-center gap-1">
                     <div class="w-2 h-2 rounded-full
@@ -65,9 +65,9 @@
                                 @break
                         @endswitch">
                     </div>
-                    <span>{{ __( $section['section'], [], 'messages', app()->getLocale()) ?: $section['section'] }} : {{ round($section['completion'] / $section['weight']) * 100 }}</span>
+                    <span>{{ __( $section['section']) }}: {{ round($section['completion'] / $section['weight']) * 100 }}%</span>
                 </div>
             @endforeach
-        </div>
+        </div> --}}
     </div>
 </div>

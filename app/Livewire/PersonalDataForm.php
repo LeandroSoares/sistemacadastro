@@ -15,7 +15,7 @@ class PersonalDataForm extends Component
     public $email = null;
     public $cpf = null;
     public $rg = null;
-    public $age = null;
+    public $birth_date = null;
     public $home_phone = null;
     public $mobile_phone = null;
     public $work_phone = null;
@@ -32,7 +32,7 @@ class PersonalDataForm extends Component
             $this->email = $user->personalData->email;
             $this->cpf = $user->personalData->cpf;
             $this->rg = $user->personalData->rg;
-            $this->age = $user->personalData->age;
+            $this->birth_date = $user->personalData->birth_date?->format('Y-m-d');
             $this->home_phone = $user->personalData->home_phone;
             $this->mobile_phone = $user->personalData->mobile_phone;
             $this->work_phone = $user->personalData->work_phone;
@@ -49,10 +49,10 @@ class PersonalDataForm extends Component
             'email' => 'required|email',
             'cpf' => 'nullable',
             'rg' => 'nullable',
-            'age' => 'required|numeric|min:1',
+            'birth_date' => 'required|date',
             'mobile_phone' => 'required',
             'emergency_contact' => 'required',
-            'home_phone' => 'nullable',
+            'home_phone' => 'nullable', 
             'work_phone' => 'nullable'
         ]);
 

@@ -123,11 +123,11 @@ class User extends Authenticatable
     }
 
     protected const SECTION_WEIGHTS = [
-        'personalData' => 20,
+        'personalData' => 25,
         'religiousInfo' => 15,
-        'priestlyFormation' => 10,
+        'priestlyFormation' => 15,
         'headOrisha' => 15,
-        'forceCross' => 10,
+        'forceCross' => 15,
         'workGuide' => 15,
     ];
 
