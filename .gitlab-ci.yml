@@ -4,6 +4,11 @@ variables:
   MYSQL_PASSWORD: secret
   MYSQL_DATABASE: homestead
   DB_HOST: mysql
+  DB_USERNAME: homestead
+  DB_PASSWORD: secret
+  DB_DATABASE: homestead
+  DB_CONNECTION: mysql
+  DB_PORT: 3306
 
 cache:
   paths:
@@ -18,15 +23,31 @@ stages:
 .config:
   image: lorisleiva/laravel-docker:8.2
   services:
-    - mysql:8.0
+    - name: mysql:8.0
+      alias: mysql
+      variables:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: homestead
+        MYSQL_USER: homestead
+        MYSQL_PASSWORD: secret
   before_script:
     # Install Node dependencies.
     - npm install
     # install composer dependencies
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     # Copy over example configuration.
-    # Don't forget to set the database config in .env.example correctly
     - cp .env.example .env
+    # Update database configuration
+    - sed -i "s/DB_HOST=.*/DB_HOST=mysql/" .env
+    - sed -i "s/DB_USERNAME=.*/DB_USERNAME=homestead/" .env
+    - sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=secret/" .env
+    - sed -i "s/DB_DATABASE=.*/DB_DATABASE=homestead/" .env
+    # Wait for MySQL to be ready
+    - |
+      until mysql -h mysql -u homestead -psecret -e "SELECT 1"; do
+        echo "Waiting for MySQL to be ready..."
+        sleep 1
+      done
     # Generate an application key. Re-cache.
     - php artisan key:generate
     - php artisan config:cache
