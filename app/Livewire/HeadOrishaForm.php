@@ -61,6 +61,7 @@ class HeadOrishaForm extends Component
         );
 
         session()->flash('message', 'Orixás salvos com sucesso.');
+        $this->dispatch('profile-updated');
     }
 
     public function render()

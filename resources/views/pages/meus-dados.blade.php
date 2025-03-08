@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-16">
             <livewire:personal-data-form :user="$user" />
             <br>
             <livewire:religious-info-form :user="$user" />
@@ -38,4 +38,6 @@
             <livewire:last-temple-form :user="$user" />
         </div>
     </div>
+
+    <livewire:profile-progress-bar :user="$user" :is-fixed="true" />
 </x-app-layout>

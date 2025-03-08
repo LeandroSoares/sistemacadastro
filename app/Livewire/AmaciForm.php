@@ -61,8 +61,9 @@ class AmaciForm extends Component
         } else {
             $this->user->amacis()->create($validatedData);
             session()->flash('message', 'Amaci registrado com sucesso.');
+            
         }
-
+        $this->dispatch('profile-updated');
         $this->reset(['editing', 'editingAmaciId', 'type', 'observations', 'date']);
     }
 
@@ -72,6 +73,7 @@ class AmaciForm extends Component
         if ($amaci && $amaci->user_id === $this->user->id) {
             $amaci->delete();
             session()->flash('message', 'Amaci removido com sucesso.');
+            $this->dispatch('profile-updated');
         }
     }
 

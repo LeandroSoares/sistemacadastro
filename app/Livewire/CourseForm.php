@@ -64,7 +64,7 @@ class CourseForm extends Component
             ]);
             session()->flash('success', 'Curso criado com sucesso!');
         }
-
+        $this->dispatch('profile-updated');
         return redirect()->route('courses.index');
     }
 

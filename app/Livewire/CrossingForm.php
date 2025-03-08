@@ -29,7 +29,7 @@ class CrossingForm extends Component
         $this->user->crossings()->create($validatedData);
 
         session()->flash('message', 'Cruzamento adicionado com sucesso.');
-        
+        $this->dispatch('profile-updated');
         $this->reset(['entity', 'date', 'purpose']);
     }
 

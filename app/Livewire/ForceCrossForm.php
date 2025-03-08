@@ -54,6 +54,7 @@ class ForceCrossForm extends Component
         } catch (\Exception $e) {
             session()->flash('error', 'Erro ao salvar a cruz de força.');
         }
+        $this->dispatch('profile-updated');
     }
 
     public function render()

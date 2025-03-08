@@ -121,4 +121,40 @@ class User extends Authenticatable
     {
         return $this->hasMany(Amaci::class);
     }
+
+    protected const SECTION_WEIGHTS = [
+        'personalData' => 20,
+        'religiousInfo' => 15,
+        'priestlyFormation' => 10,
+        'headOrisha' => 15,
+        'workGuide' => 15,
+        'forceCross' => 10,
+        'initiatedOrishas' => 15
+    ];
+
+    public function calculateProfileProgress(): int
+    {
+        $totalProgress = 0;
+
+        foreach (self::SECTION_WEIGHTS as $relation => $weight) {
+            $totalProgress += $this->calculateSectionProgress($relation, $weight);
+        }
+
+        return round($totalProgress);
+    }
+
+    protected function calculateSectionProgress(string $relation, int $weight): float
+    {
+        $model = $this->$relation;
+        
+        if ($relation === 'initiatedOrishas') {
+            return ($this->$relation()->count() > 0 ? 100 : 0) * $weight / 100;
+        }
+        
+        if ($model && method_exists($model, 'getCompletionRate')) {
+            return $model->getCompletionRate() * $weight / 100;
+        }
+        
+        return 0;
+    }
 }

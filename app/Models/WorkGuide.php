@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Models;
-
+use App\Traits\CalculatesCompletion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class WorkGuide extends Model
 {
-    use HasFactory;
+    use HasFactory, CalculatesCompletion;
 
     /**
      * The table associated with the model.
@@ -49,5 +49,16 @@ class WorkGuide extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getCompletionRate(): int
+    {
+        return $this->calculateCompletion([
+            'caboclo' => 20,
+            'preto_velho' => 20,
+            'exu' => 20,
+            'pombagira' => 20,
+            'ere' => 20
+        ]);
     }
 }

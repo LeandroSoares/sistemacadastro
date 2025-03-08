@@ -50,6 +50,7 @@ class LastTempleForm extends Component
         );
 
         session()->flash('message', 'Último templo salvo com sucesso.');
+        $this->dispatch('profile-updated');
     }
 
     public function render()

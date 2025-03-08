@@ -41,6 +41,7 @@ class PriestlyFormationForm extends Component
         );
 
         session()->flash('message', 'Formação sacerdotal salva com sucesso.');
+        $this->dispatch('profile-updated');
     }
 
     public function render()

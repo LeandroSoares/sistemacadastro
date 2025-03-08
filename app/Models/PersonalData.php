@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\CalculatesCompletion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PersonalData extends Model
 {
-    use HasFactory;
+    use HasFactory, CalculatesCompletion;
 
     /**
      * The table associated with the model.
@@ -52,5 +53,19 @@ class PersonalData extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getCompletionRate(): int
+    {
+        return $this->calculateCompletion([
+            'name' => 15,
+            'address' => 15,
+            'zip_code' => 10,
+            'email' => 15,
+            'cpf' => 15,
+            'rg' => 10,
+            'age' => 10,
+            'mobile_phone' => 10
+        ]);
     }
 }

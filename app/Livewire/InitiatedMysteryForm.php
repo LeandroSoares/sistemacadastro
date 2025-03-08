@@ -67,7 +67,7 @@ class InitiatedMysteryForm extends Component
             $this->user->initiatedMysteries()->create($validatedData);
             session()->flash('message', 'Mistério iniciado registrado com sucesso.');
         }
-
+        $this->dispatch('profile-updated');
         $this->reset(['editing', 'editingMysteryId', 'mystery_id', 'date', 'completed', 'observations']);
     }
     public function deleteMystery($id)

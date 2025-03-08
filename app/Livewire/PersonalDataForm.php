@@ -62,6 +62,8 @@ class PersonalDataForm extends Component
         );
 
         session()->flash('message', 'Dados pessoais salvos com sucesso.');
+        
+        $this->dispatch('profile-updated');
     }
 
     public function render()

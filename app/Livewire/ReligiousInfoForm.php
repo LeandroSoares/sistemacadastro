@@ -70,6 +70,7 @@ class ReligiousInfoForm extends Component
         );
 
         session()->flash('message', 'Informações religiosas salvas com sucesso.');
+        $this->dispatch('profile-updated');
     }
 
     public function render()

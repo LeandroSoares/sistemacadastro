@@ -84,7 +84,7 @@ class ReligiousCourseForm extends Component
             $this->user->religiousCourses()->create($validatedData);
             session()->flash('message', 'Curso religioso adicionado com sucesso.');
         }
-
+        $this->dispatch('profile-updated');
         $this->reset([
             'editing',
             'editingCourseId',

@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Models;
-
+use App\Traits\CalculatesCompletion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class HeadOrisha extends Model
 {
-    use HasFactory;
+    use HasFactory, CalculatesCompletion;
 
     /**
      * The table associated with the model.
@@ -50,5 +50,16 @@ class HeadOrisha extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getCompletionRate(): int
+    {
+        return $this->calculateCompletion([
+            'ancestor' => 30,
+            'front' => 30,
+            'adjunct' => 25,
+            'left_side' => 7.5,
+            'right_side' => 7.5
+        ]);
     }
 }

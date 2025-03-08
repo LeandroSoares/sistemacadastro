@@ -69,7 +69,7 @@ class InitiatedOrishaForm extends Component
             ]);
             session()->flash('message', 'Orixá iniciado registrado com sucesso.');
         }
-    
+        $this->dispatch('profile-updated');
         $this->reset(['editing', 'editingOrishaId', 'orisha_id', 'initiated', 'observations']);
     }
     
