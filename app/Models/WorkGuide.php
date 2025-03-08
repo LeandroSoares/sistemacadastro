@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Traits\CalculatesCompletion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,11 +55,23 @@ class WorkGuide extends Model
     public function getCompletionRate(): int
     {
         return $this->calculateCompletion([
-            'caboclo' => 20,
-            'preto_velho' => 20,
-            'exu' => 20,
-            'pombagira' => 20,
-            'ere' => 20
+            'caboclo' => 6,
+            'cabocla' => 6,
+            'ogum' => 6,
+            'xango' => 6,
+            'baiano' => 6,
+            'baiana' => 6,
+            'preto_velho' => 6,
+            'preta_velha' => 6,
+            'boiadeiro' => 6,
+            'boiadeira' => 6,
+            'cigano' => 6,
+            'cigana' => 6,
+            'marinheiro' => 6,
+            'ere' => 6,
+            'exu' => 6,
+            'pombagira' => 5,
+            'exu_mirim' => 5
         ]);
     }
 }

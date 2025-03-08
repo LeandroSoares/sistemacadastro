@@ -43,5 +43,13 @@
     "users.index": "Gestão de Usuários",
     "courses.index": "Cursos",
     "orishas.index": "Orixás",
-    "home": "Home"
-} 
+    "home": "Home",
+    "personalData": "Dados Pessoais",
+    "religiousInfo": "Informações Religiosas",
+    "priestlyFormation": "Formação Sacerdotal",
+    "headOrisha": "Orixá de Cabeça",
+    "workGuide": "Guia de Trabalho",
+    "forceCross": "Cruz de Força",
+    "initiatedOrishas": "Orixás Iniciados",
+    "profile_progress": "Progresso do seu cadastro"
+}

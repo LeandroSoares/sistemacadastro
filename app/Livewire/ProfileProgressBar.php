@@ -9,12 +9,14 @@ class ProfileProgressBar extends Component
 {
     public $user;
     public $progress;
+    public $detailedProgress;
     public $isFixed;
 
     public function mount($user, $isFixed = false)
     {
         $this->user = $user;
         $this->progress = $user->calculateProfileProgress();
+        $this->detailedProgress = $user->getDetailedProgress();
         $this->isFixed = $isFixed;
     }
 
@@ -22,6 +24,7 @@ class ProfileProgressBar extends Component
     public function refreshProgress()
     {
         $this->progress = $this->user->fresh()->calculateProfileProgress();
+        $this->detailedProgress = $this->user->fresh()->getDetailedProgress();
     }
 
     public function render()

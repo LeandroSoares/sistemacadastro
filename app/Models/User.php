@@ -127,9 +127,8 @@ class User extends Authenticatable
         'religiousInfo' => 15,
         'priestlyFormation' => 10,
         'headOrisha' => 15,
-        'workGuide' => 15,
         'forceCross' => 10,
-        'initiatedOrishas' => 15
+        'workGuide' => 15,
     ];
 
     public function calculateProfileProgress(): int
@@ -147,14 +146,30 @@ class User extends Authenticatable
     {
         $model = $this->$relation;
         
-        if ($relation === 'initiatedOrishas') {
-            return ($this->$relation()->count() > 0 ? 100 : 0) * $weight / 100;
-        }
         
         if ($model && method_exists($model, 'getCompletionRate')) {
             return $model->getCompletionRate() * $weight / 100;
         }
         
         return 0;
+    }
+
+    public function getDetailedProgress(): array
+    {
+        $progress = [];
+        $currentPosition = 0;
+
+        foreach (self::SECTION_WEIGHTS as $section => $weight) {
+            $completion = $this->calculateSectionProgress($section, $weight);
+            $progress[] = [
+                'section' => $section,
+                'weight' => $weight,
+                'completion' => $completion,
+                'position' => $currentPosition
+            ];
+            $currentPosition += $weight;
+        }
+
+        return $progress;
     }
 }
