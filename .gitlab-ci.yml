@@ -21,10 +21,12 @@ stages:
   - deploy
 
 .config:
+  timeout: 5m
   image: lorisleiva/laravel-docker:8.2
   services:
     - name: mysql:8.0
       alias: mysql
+      command: ["--default-authentication-plugin=mysql_native_password"]
       variables:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: homestead
@@ -42,9 +44,9 @@ stages:
     - sed -i "s/DB_USERNAME=.*/DB_USERNAME=homestead/" .env
     - sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=secret/" .env
     - sed -i "s/DB_DATABASE=.*/DB_DATABASE=homestead/" .env
-    # Wait for MySQL to be ready
+    # Wait for MySQL to be ready and alter user authentication
     - |
-      until mysql -h mysql -u homestead -psecret -e "SELECT 1"; do
+      until mysql -h mysql -u root -proot -e "ALTER USER 'homestead'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';"; do
         echo "Waiting for MySQL to be ready..."
         sleep 1
       done
