@@ -17,11 +17,17 @@ class RoleSeeder extends Seeder
         $user = Role::create(['name' => 'user']);
 
         // Criar permissões básicas
-        $manageUsers = Permission::create(['name' => 'manage users']);
-        $createUsers = Permission::create(['name' => 'create users']);
-        $editUsers = Permission::create(['name' => 'edit users']);
-        $deleteUsers = Permission::create(['name' => 'delete users']);
-        $viewUsers = Permission::create(['name' => 'view users']);
+        Permission::create(['name' => 'manage users']);
+        Permission::create(['name' => 'create users']);
+        Permission::create(['name' => 'edit users']);
+        Permission::create(['name' => 'delete users']);
+        Permission::create(['name' => 'view users']);
+
+        Permission::create(['name' => 'manage courses']);
+        Permission::create(['name' => 'create courses']);
+        Permission::create(['name' => 'edit courses']);
+        Permission::create(['name' => 'delete courses']);
+        Permission::create(['name' => 'view courses']);
 
         // Atribuir permissões às funções
         $admin->givePermissionTo([
@@ -33,9 +39,14 @@ class RoleSeeder extends Seeder
         ]);
 
         $manager->givePermissionTo([
+            'manage users',
             'create users',
             'edit users',
             'view users'
+        ]);
+
+        $user->givePermissionTo([
+            'view courses'
         ]);
     }
 }

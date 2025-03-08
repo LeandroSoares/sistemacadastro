@@ -9,11 +9,11 @@ cache:
   paths:
     - vendor/
     - node_modules/
+    - public/
 
 stages:
   - test
   - deploy
-
 .config:
   image: edbizarro/gitlab-ci-pipeline-php:latest
   services:

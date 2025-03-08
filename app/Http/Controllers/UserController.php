@@ -80,13 +80,14 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if ($user->hasRole('admin') && !$user->hasRole('admin')) {
+        
+        if ($user->hasRole('admin')) {
             return redirect()->route('users.index')
-                ->with('error', 'Você não tem permissão para excluir um administrador.');
+                ->with('error', 'Não é permitido excluir um administrador.');
         }
 
         $user->delete();
         return redirect()->route('users.index')
             ->with('success', 'Usuário excluído com sucesso!');
     }
-} 
+}
