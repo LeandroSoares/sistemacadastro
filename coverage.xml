@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1748407766">
-  <project timestamp="1748407766">
+<coverage generated="1748408987">
+  <project timestamp="1748408987">
     <package name="App\Console\Commands">
       <file name="C:\Users\leand\projects\sistema_iweoba\app\Console\Commands\AssignAdminRole.php">
         <class name="App\Console\Commands\AssignAdminRole" namespace="App\Console\Commands">
