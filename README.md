@@ -7,60 +7,80 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Manual de Instalação
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **Pré-requisitos**  
+   - PHP >= 8.0  
+   - Composer  
+   - Node.js e npm  
+   - MySQL
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. **Clonar o repositório**
+   ```bash
+   git clone https://seurepositorio.git
+   cd sistema_iweoba
+   ```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **Instalar dependências**
+   ```bash
+   composer install
+   npm install
+   ```
 
-## Learning Laravel
+4. **Configurar variáveis de ambiente**
+   ```bash
+   cp .env.example .env
+   ```
+   Edite o arquivo `.env` conforme necessário (DB_HOST, DB_USERNAME, DB_PASSWORD, etc).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+5. **Gerar chave da aplicação**
+   ```bash
+   php artisan key:generate
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+6. **Migrar e popular o banco de dados**
+   ```bash
+   php artisan migrate --seed
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+7. **Iniciar o servidor**
+   ```bash
+   php artisan serve
+   ```
 
-## Laravel Sponsors
+8. **Compilar assets frontend (opcional)**
+   ```bash
+   npm run dev
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Manual dos Níveis de Usuário
 
-### Premium Partners
+## Gerente
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Acesso:**  
+  - Visualiza e gerencia recursos sob sua responsabilidade.
+  - Pode cadastrar, editar e remover registros de sua área.
+  - Não possui acesso a configurações globais do sistema.
 
-## Contributing
+- **Funcionalidades:**  
+  - Gerenciamento de equipes/setores.
+  - Relatórios restritos ao seu escopo.
+  - Aprovação de solicitações dentro do seu nível.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Admin
 
-## Code of Conduct
+- **Acesso:**  
+  - Controle total do sistema.
+  - Pode criar, editar e remover qualquer usuário, incluindo outros admins e gerentes.
+  - Acesso a todas as configurações e relatórios.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Funcionalidades:**  
+  - Gerenciamento global de permissões e configurações.
+  - Visualização de todos os dados do sistema.
+  - Auditoria e logs de atividades.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Sobre o Laravel
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Este projeto utiliza o framework Laravel. Para mais informações, consulte a [documentação oficial](https://laravel.com/docs).

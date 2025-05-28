@@ -4,6 +4,10 @@
             <h2 class="text-lg font-medium text-gray-900 mb-6">
                 Editar Dados Básicos do Usuário
             </h2>
+        @else
+            <h2 class="text-lg font-medium text-gray-900 mb-6">
+                Criar Novo Usuário
+            </h2>
         @endif
 
         @if (session('success'))
@@ -47,7 +51,7 @@
                         class="rounded border-gray-300 text-gray-600 shadow-sm focus:ring-gray-500 cursor-not-allowed">
                     <label class="ml-2 text-sm text-gray-600">{{ __('user') }} (Padrão)</label>
                 </div>
-                
+
                 <!-- Outras roles -->
                 <div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     @foreach($roles as $role)
@@ -78,4 +82,4 @@
             </x-primary-button>
         </div>
     </form>
-</div> 
+</div>

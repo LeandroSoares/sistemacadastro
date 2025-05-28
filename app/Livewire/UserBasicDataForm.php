@@ -24,23 +24,23 @@ class UserBasicDataForm extends Component
     public function mount(?User $user = null)
     {
         $this->user = $user;
-        $this->isCreating = !$user;
-        
+        $this->isCreating = $user->id == null;
+
         // Obter o ID da role 'user'
         $userRole = Role::where('name', 'user')->first();
         $this->userRoleId = $userRole?->id;
-        
+
         if ($user) {
             $this->name = $user->name;
             $this->email = $user->email;
             $this->selectedRoles = $user->roles->pluck('id')->toArray();
         }
-        
+
         // Garantir que a role 'user' esteja sempre selecionada
         if ($this->userRoleId && !in_array($this->userRoleId, $this->selectedRoles)) {
             $this->selectedRoles[] = $this->userRoleId;
         }
-        
+
         // Carregar todas as roles exceto 'user' que será sempre fixa
         $this->roles = Role::where('name', '!=', 'user')->get();
     }
@@ -85,7 +85,7 @@ class UserBasicDataForm extends Component
 
         // Buscar as roles pelo ID e pegar os nomes
         $roles = Role::whereIn('id', $this->selectedRoles)->pluck('name');
-        
+
         // Apenas admin pode modificar função de admin
         /** @var User */
         $currentUser = Auth::user();
@@ -94,12 +94,12 @@ class UserBasicDataForm extends Component
                 return $role === 'admin';
             });
         }
-        
+
         // Garantir que 'user' esteja sempre presente
         if (!$roles->contains('user')) {
             $roles->push('user');
         }
-        
+
         $this->user->syncRoles($roles);
 
         if ($this->isCreating) {
@@ -115,4 +115,4 @@ class UserBasicDataForm extends Component
     {
         return view('livewire.user-basic-data-form');
     }
-} 
+}
