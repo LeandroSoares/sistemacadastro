@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form method="POST" action="{{ route('orishas.store') }}">
                         @csrf
-
+                        @method('POST')
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
                             <input type="text" name="name" id="name" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
@@ -26,11 +26,11 @@
                             <label class="block text-sm font-medium text-gray-700">Tipo</label>
                             <div class="mt-2">
                                 <div class="flex items-center">
-                                    <input type="checkbox" name="is_right" id="is_right" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <input type="checkbox" name="is_right" id="is_right" value="1" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" {{ old('is_right') ? 'checked' : '' }}>
                                     <label for="is_right" class="block ml-2 text-sm text-gray-900">Direita</label>
                                 </div>
                                 <div class="flex items-center mt-2">
-                                    <input type="checkbox" name="is_left" id="is_left" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <input type="checkbox" name="is_left" id="is_left" value="1" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" {{ old('is_left') ? 'checked' : '' }}>
                                     <label for="is_left" class="block ml-2 text-sm text-gray-900">Esquerda</label>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                             <label class="block text-sm font-medium text-gray-700">Status</label>
                             <div class="mt-2">
                                 <div class="flex items-center">
-                                    <input type="checkbox" name="active" id="active" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <input type="checkbox" name="active" id="active" value="1" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" {{ old('active') ? 'checked' : '' }}>
                                     <label for="active" class="block ml-2 text-sm text-gray-900">Ativo</label>
                                 </div>
                             </div>

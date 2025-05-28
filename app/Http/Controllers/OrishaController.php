@@ -10,9 +10,9 @@ class OrishaController extends Controller
     private const VALIDATION_RULES = [
         'name' => 'required|max:255',
         'description' => 'required',
-        'is_right' => 'required|boolean',
-        'is_left' => 'required|boolean',
-        'active' => 'required|boolean'
+        'is_right' => 'nullable',
+        'is_left' => 'nullable',
+        'active' => 'nullable'
     ];
 
     private const SUCCESS_MESSAGES = [
@@ -34,12 +34,32 @@ class OrishaController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate(self::VALIDATION_RULES);
+        try {
+            $validated = $request->validate(self::VALIDATION_RULES);
 
-        Orisha::create($validated);
+            $data = [
+                'name' => $validated['name'],
+                'description' => $validated['description'],
+                'is_right' => $request->has('is_right'),
+                'is_left' => $request->has('is_left'),
+                'active' => $request->boolean('active', true)
+            ];
 
-        return redirect()->route('orishas.index')
-            ->with('success', self::SUCCESS_MESSAGES['store']);
+            \Log::info('Creating Orisha with data:', $data);
+
+            $orisha = Orisha::create($data);
+
+            if (!$orisha) {
+                \Log::error('Failed to create Orisha');
+                return back()->with('error', 'Erro ao criar Orixá.');
+            }
+
+            return redirect()->route('orishas.index')
+                ->with('success', self::SUCCESS_MESSAGES['store']);
+        } catch (\Exception $e) {
+            \Log::error('Error creating Orisha: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'Erro ao criar Orixá: ' . $e->getMessage()])->withInput();
+        }
     }
 
     public function edit(Orisha $orisha)
@@ -49,12 +69,27 @@ class OrishaController extends Controller
 
     public function update(Request $request, Orisha $orisha)
     {
-        $validated = $request->validate(self::VALIDATION_RULES);
+        try {
+            $validated = $request->validate(self::VALIDATION_RULES);
 
-        $orisha->update($validated);
+            $data = [
+                'name' => $validated['name'],
+                'description' => $validated['description'],
+                'is_right' => $request->has('is_right'),
+                'is_left' => $request->has('is_left'),
+                'active' => $request->has('active')
+            ];
 
-        return redirect()->route('orishas.index')
-            ->with('success', self::SUCCESS_MESSAGES['update']);
+            \Log::info('Updating Orisha with data:', $data);
+
+            $orisha->update($data);
+
+            return redirect()->route('orishas.index')
+                ->with('success', self::SUCCESS_MESSAGES['update']);
+        } catch (\Exception $e) {
+            \Log::error('Error updating Orisha: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'Erro ao atualizar Orixá: ' . $e->getMessage()])->withInput();
+        }
     }
 
     public function destroy(Orisha $orisha)

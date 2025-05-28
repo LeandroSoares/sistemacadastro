@@ -24,6 +24,8 @@ class Orisha extends Model
     protected $fillable = [
         'name',
         'description',
+        'is_right',
+        'is_left',
         'active'
     ];
 
