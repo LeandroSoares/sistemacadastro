@@ -46,7 +46,7 @@ class CourseForm extends Component
         $user = Auth::user();
         if (!$user->hasAnyRole(['admin', 'manager'])) {
             session()->flash('error', 'Você não tem permissão para gerenciar cursos.');
-            return;
+            return null;
         }
 
         $this->validate();
@@ -64,7 +64,9 @@ class CourseForm extends Component
             ]);
             session()->flash('success', 'Curso criado com sucesso!');
         }
+
         $this->dispatch('profile-updated');
+
         return redirect()->route('courses.index');
     }
 
@@ -72,4 +74,5 @@ class CourseForm extends Component
     {
         return view('livewire.course-form');
     }
-} 
+}
+

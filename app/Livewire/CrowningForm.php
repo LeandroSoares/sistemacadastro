@@ -14,11 +14,11 @@ class CrowningForm extends Component
     public $guide_name = null;
     public $priest_name = null;
     public $temple_name = null;
-    
+
     public function mount(User $user)
     {
         $this->user = $user;
-        
+
         if ($user->crowning) {
             $this->start_date = $user->crowning->start_date;
             $this->end_date = $user->crowning->end_date;

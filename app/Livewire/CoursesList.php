@@ -37,7 +37,7 @@ class CoursesList extends Component
     {
         /** @var \App\Models\User */
         $currentUser = Auth::user();
-        
+
         if (!$currentUser->hasAnyRole(['admin', 'manager'])) {
             session()->flash('error', 'Você não tem permissão para excluir cursos.');
             return;
@@ -63,7 +63,7 @@ class CoursesList extends Component
     {
         /** @var \App\Models\User */
         $currentUser = Auth::user();
-        
+
         if (!$currentUser->hasAnyRole(['admin', 'manager'])) {
             session()->flash('error', 'Você não tem permissão para alterar o status do curso.');
             return;
@@ -90,4 +90,4 @@ class CoursesList extends Component
                 ->paginate($this->perPage)
         ]);
     }
-} 
+}
