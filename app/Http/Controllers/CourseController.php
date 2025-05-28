@@ -27,4 +27,4 @@ class CourseController extends BaseController
     {
         return view('courses.edit', compact('course'));
     }
-} 
+}

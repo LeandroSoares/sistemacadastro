@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class OrishaController extends Controller
 {
+    private const VALIDATION_RULES = [
+        'name' => 'required|max:255',
+        'description' => 'required',
+        'is_right' => 'required|boolean',
+        'is_left' => 'required|boolean',
+        'active' => 'required|boolean'
+    ];
+
+    private const SUCCESS_MESSAGES = [
+        'store' => 'Orixá criado com sucesso.',
+        'update' => 'Orixá atualizado com sucesso.',
+        'destroy' => 'Orixá excluído com sucesso.'
+    ];
+
     public function index()
     {
         $orishas = Orisha::all();
@@ -20,18 +34,12 @@ class OrishaController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'is_right' => 'required|boolean',
-            'is_left' => 'required|boolean',
-            'active' => 'required|boolean'
-        ]);
+        $validated = $request->validate(self::VALIDATION_RULES);
 
         Orisha::create($validated);
 
         return redirect()->route('orishas.index')
-            ->with('success', 'Orixá criado com sucesso.');
+            ->with('success', self::SUCCESS_MESSAGES['store']);
     }
 
     public function edit(Orisha $orisha)
@@ -41,18 +49,12 @@ class OrishaController extends Controller
 
     public function update(Request $request, Orisha $orisha)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'is_right' => 'required|boolean',
-            'is_left' => 'required|boolean',
-            'active' => 'required|boolean'
-        ]);
+        $validated = $request->validate(self::VALIDATION_RULES);
 
         $orisha->update($validated);
 
         return redirect()->route('orishas.index')
-            ->with('success', 'Orixá atualizado com sucesso.');
+            ->with('success', self::SUCCESS_MESSAGES['update']);
     }
 
     public function destroy(Orisha $orisha)
@@ -60,6 +62,6 @@ class OrishaController extends Controller
         $orisha->delete();
 
         return redirect()->route('orishas.index')
-            ->with('success', 'Orixá excluído com sucesso.');
+            ->with('success', self::SUCCESS_MESSAGES['destroy']);
     }
 }
