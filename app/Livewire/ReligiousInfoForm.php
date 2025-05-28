@@ -25,11 +25,6 @@ class ReligiousInfoForm extends Component
     public function mount(User $user)
     {
         $this->user = $user;
-        // try {
-        //     $user->load('religiousInfo');
-        // } catch (\Exception $e) {
-        //     $user->religiousInfo = new ReligiousInfo();
-        // }
 
         if ($user->religiousInfo) {
             $this->start_date = $user->religiousInfo->start_date;

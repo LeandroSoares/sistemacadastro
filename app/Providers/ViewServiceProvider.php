@@ -8,13 +8,9 @@ use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        //
-    }
 
     public function boot()
     {
         View::share('Auth', Auth::class);
     }
-} 
+}

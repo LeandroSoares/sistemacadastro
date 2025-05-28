@@ -9,18 +9,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ForceCrossForm extends Component
 {
+    private const FIELDS = [
+        'top',
+        'bottom',
+        'left',
+        'right'
+    ];
+
+    private const VALIDATION_RULE = 'nullable|string|max:255';
+
     public User $user;
     public $top = '';
     public $bottom = '';
     public $left = '';
     public $right = '';
 
-    protected $rules = [
-        'top' => 'nullable|string|max:255',
-        'bottom' => 'nullable|string|max:255',
-        'left' => 'nullable|string|max:255',
-        'right' => 'nullable|string|max:255'
-    ];
+    protected $rules;
+
+    public function __construct()
+    {
+        $this->rules = array_fill_keys(self::FIELDS, self::VALIDATION_RULE);
+    }
 
     public function mount(User $user)
     {
