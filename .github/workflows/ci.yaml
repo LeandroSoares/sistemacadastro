@@ -12,7 +12,7 @@ jobs:
 
       steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
           with:
             fetch-depth: 0
 
@@ -52,6 +52,6 @@ jobs:
           continue-on-error: true
 
         - name: SonarQube Scan
-          uses: SonarSource/sonarqube-scan-action@v4
+          uses: SonarSource/sonarqube-scan-action@v5
           env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
