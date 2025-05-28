@@ -37,17 +37,37 @@ class UserRolesTest extends TestCase
 
     public function test_admin_has_all_permissions()
     {
-        $admin = User::factory()->create()->assignRole('admin');
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+        $admin->refresh();
 
-        $this->assertTrue($admin->can('manage users'));
         $this->assertTrue($admin->can('delete users'));
+        $this->assertTrue($admin->can('create users'));
+        $this->assertTrue($admin->can('edit users'));
+        $this->assertTrue($admin->can('view users'));
+        $this->assertTrue($admin->can('view courses'));
+        $this->assertTrue($admin->can('delete courses'));
+        $this->assertTrue($admin->can('view orishas'));
+        $this->assertTrue($admin->can('delete orishas'));
     }
 
     public function test_manager_has_limited_permissions()
     {
-        $manager = User::factory()->create()->assignRole('manager');
+        $manager = User::factory()->create();
+        $manager->assignRole('manager');
+        $manager->refresh();
 
-        $this->assertTrue($manager->can('manage users'));
+        $this->assertTrue($manager->can('view users'));
+        $this->assertTrue($manager->can('create users'));
+        $this->assertTrue($manager->can('edit users'));
         $this->assertFalse($manager->can('delete users'));
+        $this->assertTrue($manager->can('view courses'));
+        $this->assertTrue($manager->can('create courses'));
+        $this->assertTrue($manager->can('edit courses'));
+        $this->assertFalse($manager->can('delete courses'));
+        $this->assertTrue($manager->can('view orishas'));
+        $this->assertTrue($manager->can('create orishas'));
+        $this->assertTrue($manager->can('edit orishas'));
+        $this->assertFalse($manager->can('delete orishas'));
     }
 }
