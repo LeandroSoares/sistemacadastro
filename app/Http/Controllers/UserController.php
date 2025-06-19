@@ -19,7 +19,7 @@ class UserController extends Controller
                 $query->where('name', 'like', '%' . $search . '%');
             })
             ->paginate(10);
-            
+
         $user = User::find(Auth::user()->id);
         $canDelete = $user->hasRole('admin');
         return view('users.index', compact('users', 'canDelete', 'search'));
@@ -30,10 +30,10 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        // Este método não será mais necessário pois o Livewire irá gerenciar a criação
-        return redirect()->route('users.index');
+        // Método removido: criação de usuário deve ser feita via Livewire
+        abort(404);
     }
 
     public function edit(User $user): View
@@ -80,7 +80,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        
+
         if ($user->hasRole('admin')) {
             return redirect()->route('users.index')
                 ->with('error', 'Não é permitido excluir um administrador.');

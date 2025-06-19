@@ -32,12 +32,12 @@ class UserSeeder extends Seeder
         // ]);
         // $admin->assignRole(['admin', 'user', 'manager']);
 
-        // // Criar 100 usuários aleatórios
-        // User::factory()->count(100)->create()->each(function ($user) {
-        //     // Atribuir aleatoriamente uma função (manager ou user) para cada usuário
-        //     $role = rand(0, 1) ? 'manager' : 'user';
-        //     $user->assignRole($role);
-        //     $user->assignRole('user');
-        // });
+        // Criar 100 usuários aleatórios
+        User::factory()->count(100)->create()->each(function ($user) {
+            // Atribuir aleatoriamente uma função (manager ou user) para cada usuário
+            $role = rand(0, 1) ? 'manager' : 'user';
+            $user->assignRole($role);
+            $user->assignRole('user');
+        });
     }
 }

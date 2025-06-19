@@ -13,7 +13,7 @@
    - PHP >= 8.0  
    - Composer  
    - Node.js e npm  
-   - MySQL
+   - MySQL (produção) ou SQLite (testes/CI)
 
 2. **Clonar o repositório**
    ```bash
@@ -31,7 +31,7 @@
    ```bash
    cp .env.example .env
    ```
-   Edite o arquivo `.env` conforme necessário (DB_HOST, DB_USERNAME, DB_PASSWORD, etc).
+   Edite o arquivo `.env` conforme necessário (DB_HOST, DB_USERNAME, DB_PASSWORD, etc). Nunca versionar `.env`.
 
 5. **Gerar chave da aplicação**
    ```bash
@@ -53,34 +53,89 @@
    npm run dev
    ```
 
+---
+
+# Boas Práticas e Segurança
+
+- Utilize policies para proteger recursos sensíveis.
+- Use o pacote Spatie Laravel Permission para controle de acesso.
+- Sempre utilize migrations, seeders e factories para manter o banco consistente.
+- Configure variáveis sensíveis apenas via `.env`.
+- Utilize Livewire para componentes reativos, sempre validando dados no backend.
+- Implemente testes automatizados (Pest/PHPUnit) e mantenha boa cobertura.
+- Use CI/CD (GitHub Actions) e SonarQube para garantir qualidade e segurança contínua.
+
 # Manual dos Níveis de Usuário
 
 ## Gerente
-
-- **Acesso:**  
-  - Visualiza e gerencia recursos sob sua responsabilidade.
-  - Pode cadastrar, editar e remover registros de sua área.
-  - Não possui acesso a configurações globais do sistema.
-
-- **Funcionalidades:**  
-  - Gerenciamento de equipes/setores.
-  - Relatórios restritos ao seu escopo.
-  - Aprovação de solicitações dentro do seu nível.
+- Visualiza e gerencia recursos sob sua responsabilidade.
+- Pode cadastrar, editar e remover registros de sua área.
+- Não possui acesso a configurações globais do sistema.
+- Gerenciamento de equipes/setores, relatórios restritos ao seu escopo, aprovação de solicitações dentro do seu nível.
 
 ## Admin
-
-- **Acesso:**  
-  - Controle total do sistema.
-  - Pode criar, editar e remover qualquer usuário, incluindo outros admins e gerentes.
-  - Acesso a todas as configurações e relatórios.
-
-- **Funcionalidades:**  
-  - Gerenciamento global de permissões e configurações.
-  - Visualização de todos os dados do sistema.
-  - Auditoria e logs de atividades.
+- Controle total do sistema.
+- Pode criar, editar e remover qualquer usuário, incluindo outros admins e gerentes.
+- Acesso a todas as configurações e relatórios.
+- Gerenciamento global de permissões e configurações, visualização de todos os dados do sistema, auditoria e logs de atividades.
 
 ---
 
 ## Sobre o Laravel
 
 Este projeto utiliza o framework Laravel. Para mais informações, consulte a [documentação oficial](https://laravel.com/docs).
+
+
+## Preparação para instalação via FTP e phpMyAdmin
+
+1. **Upload dos arquivos**
+   - Faça upload de todos os arquivos e pastas do projeto para o servidor usando um cliente FTP (ex: FileZilla).
+   - Certifique-se de enviar inclusive as pastas ocultas (ex: `.env.example`, `.htaccess` se houver).
+
+2. **Permissões de pastas**
+   - No servidor, garanta que as pastas `storage` e `bootstrap/cache` tenham permissão de escrita (recomendado: 775 ou 777 apenas se necessário).
+
+3. **Configuração do banco de dados**
+   - Crie um banco de dados MySQL via painel de controle ou phpMyAdmin.
+   - Importe o arquivo de estrutura do banco (dump `.sql` se disponível) via phpMyAdmin, ou execute as migrations pelo terminal se possível.
+
+4. **Configuração do arquivo `.env`**
+   - Renomeie `.env.example` para `.env`.
+   - Edite o `.env` com as credenciais do banco de dados, URL do site e outras variáveis sensíveis:
+     ```env
+     APP_ENV=production
+     APP_KEY= # gere uma chave com `php artisan key:generate` e cole aqui
+     APP_URL=https://seudominio.com.br
+     DB_CONNECTION=mysql
+     DB_HOST=localhost
+     DB_PORT=3306
+     DB_DATABASE=nome_do_banco
+     DB_USERNAME=usuario
+     DB_PASSWORD=senha
+     ```
+   - **Nunca** envie o `.env` para repositórios públicos.
+
+5. **Gerar chave da aplicação**
+   - Se tiver acesso SSH, execute:
+     ```bash
+     php artisan key:generate
+     ```
+   - Se não tiver SSH, gere a chave localmente e cole no `.env` do servidor.
+
+6. **Configuração de cache e otimização**
+   - Se possível, rode:
+     ```bash
+     php artisan config:cache
+     php artisan route:cache
+     php artisan view:cache
+     ```
+   - Isso melhora a performance em produção.
+
+7. **Acesso ao sistema**
+   - Acesse pelo navegador o domínio configurado.
+   - O primeiro usuário admin pode ser criado via seeder ou diretamente no banco, conforme instruções do projeto.
+
+8. **Segurança**
+   - Remova arquivos de instalação, dumps e scripts de teste do servidor após a configuração.
+   - Mantenha o `.env` protegido e nunca versionado.
+   - Sempre utilize HTTPS em produção.
