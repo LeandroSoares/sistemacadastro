@@ -40,7 +40,15 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">RG</label>
-                <input type="text" x-mask="99.999.999-*" wire:model="rg" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <div class="flex flex-col space-y-2">
+                    <input
+                        type="text"
+                        x-mask:dynamic="rgMask"
+
+                        wire:model="rg"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                        placeholder="Digite o RG com ou sem pontuação">
+                </div>
                 @error('rg') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
 
@@ -48,27 +56,29 @@
                 <label class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
                 <input type="date" wire:model="birth_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                 @error('birth_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-            </div> 
+            </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Telefone Fixo</label>
-                <input type="text" wire:model="home_phone" x-mask="(99) 9999-9999" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <input type="text" wire:model="home_phone" x-mask:dynamic="telMask" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Celular</label>
-                <input type="text" wire:model="mobile_phone" x-mask="(99) 99999-9999" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <input type="text" wire:model="mobile_phone" x-mask:dynamic="telMask" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                 @error('mobile_phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Telefone Trabalho</label>
-                <input type="text" wire:model="work_phone" x-mask="(99) 9999-9999" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <input type="text" wire:model="work_phone" x-mask:dynamic="telMask" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Contato de Emergência</label>
-                <input type="text" wire:model="emergency_contact" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <input type="text"
+                x-mask="(99) 99999-9999 | Nome: *********************************************************"
+                wire:model="emergency_contact" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                 @error('emergency_contact') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
         </div>

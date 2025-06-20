@@ -20,24 +20,24 @@ class HeadOrishaForm extends Component
     public $right_side = null;
     public $right_side_together = null;
     public $sacredOrishas = [];
-    
+
     public function mount(User $user)
     {
         $this->user = $user;
         $this->sacredOrishas = Orisha::where('active', true)
             // ->where('is_right', true)
             ->get();
-        
-        if ($user->orisha) {
-            $this->ancestor = $user->orisha->ancestor;
-            $this->front = $user->orisha->front;
-            $this->front_together = $user->orisha->front_together;
-            $this->adjunct = $user->orisha->adjunct;
-            $this->adjunct_together = $user->orisha->adjunct_together;
-            $this->left_side = $user->orisha->left_side;
-            $this->left_side_together = $user->orisha->left_side_together;
-            $this->right_side = $user->orisha->right_side;
-            $this->right_side_together = $user->orisha->right_side_together;
+
+        if ($user->headOrisha) {
+            $this->ancestor = $user->headOrisha->ancestor;
+            $this->front = $user->headOrisha->front;
+            $this->front_together = $user->headOrisha->front_together;
+            $this->adjunct = $user->headOrisha->adjunct;
+            $this->adjunct_together = $user->headOrisha->adjunct_together;
+            $this->left_side = $user->headOrisha->left_side;
+            $this->left_side_together = $user->headOrisha->left_side_together;
+            $this->right_side = $user->headOrisha->right_side;
+            $this->right_side_together = $user->headOrisha->right_side_together;
         }
     }
 

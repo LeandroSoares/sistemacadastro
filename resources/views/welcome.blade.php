@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Casa Caridade</title>
-        
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -12,8 +12,8 @@
         <!-- Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased font-sans">
-        <div class="min-h-screen bg-white dark:bg-black flex flex-col justify-between">
+    <body class="antialiased font-sans bg-white">
+        <div class="min-h-screen bg-white flex flex-col justify-between">
             <!-- Navigation -->
             <header class="w-full px-4 py-2">
                 @if (Route::has('login'))
@@ -23,7 +23,7 @@
                                 Home
                             </a>
                         @else
-                            <a href="{{ route('login') }}" class="rounded-md px-2 py-1 text-sm text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80">
+                            <a href="{{ route('login') }}" class="rounded-md px-2 py-1 text-sm text-black bg-white ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                 Login
                             </a>
 
@@ -40,21 +40,21 @@
             <!-- Main Content -->
             <main class="flex-1 flex items-center justify-center px-4 py-6">
                 <div class="w-full text-center">
-                    <img 
-                        src="{{ asset('images/logo.jpg') }}" 
-                        alt="Casa Caridade" 
+                    <img
+                        src="{{ asset('images/logo.jpg') }}"
+                        alt="Casa Caridade"
                         class="mx-auto w-64 h-auto rounded-lg"
                     />
                 </div>
             </main>
 
             <!-- Footer -->
-            <footer class="w-full bg-white dark:bg-gray-900 py-4">
+            <footer class="w-full bg-white py-4">
                 <div class="max-w-7xl mx-auto px-4 text-center">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    <h2 class="text-lg font-semibold text-black mb-2">
                         Casa de Caridade Legião de Oxóssi e Ogum
                     </h2>
-                    <address class="text-sm text-gray-600 dark:text-gray-400 not-italic">
+                    <address class="text-sm text-black not-italic">
                         Rua Ilhéus do Prata, 26 - Imirim<br>
                         CEP: 02478-060<br>
                         São Paulo - SP<br>

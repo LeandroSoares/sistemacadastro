@@ -2,18 +2,16 @@
 
 use Illuminate\Http\Request;
 
-$privatePath = __DIR__ . '/../../sites/casacaridade';
-
 define('LARAVEL_START', microtime(true));
 
 // Determine if the application is in maintenance mode...
-if (file_exists($maintenance = $privatePath . '/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__ . '/../../casa_caridade/storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
 // Register the Composer autoloader...
-require $privatePath . '/vendor/autoload.php';
+require __DIR__ . '/../../casa_caridade/vendor/autoload.php';
 
 // Bootstrap Laravel and handle the request...
-(require_once $privatePath . '/bootstrap/app.php')
+(require_once __DIR__ . '/../../casa_caridade/bootstrap/app.php')
     ->handleRequest(Request::capture());

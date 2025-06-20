@@ -3,7 +3,7 @@
     <!-- Lista de Cruzamentos -->
     <div class="mt-8">
         <h3 class="text-lg font-medium text-gray-900 mb-4">Cruzamentos Registrados</h3>
-        
+
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -49,43 +49,44 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <label class="block text-sm font-medium text-gray-700">Entidade</label>
-                <input type="text" 
-                    wire:model="entity" 
+                <input type="text"
+                    wire:model="entity"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                @error('entity') 
-                    <span class="text-red-500 text-xs">{{ $message }}</span> 
+                @error('entity')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
                 @enderror
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Data</label>
-                <input type="date" 
-                    wire:model="date" 
+                <input type="date"
+                    wire:model="date"
+                    x-mask="9999-99-99"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                @error('date') 
-                    <span class="text-red-500 text-xs">{{ $message }}</span> 
+                @error('date')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
                 @enderror
             </div>
 
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">Propósito</label>
                 <textarea
-                    wire:model="purpose" 
+                    wire:model="purpose"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                     rows="3"></textarea>
-                @error('purpose') 
-                    <span class="text-red-500 text-xs">{{ $message }}</span> 
+                @error('purpose')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
                 @enderror
             </div>
         </div>
 
         <div class="flex justify-end mt-6">
-            <button type="submit" 
+            <button type="submit"
                 class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Adicionar Cruzamento
             </button>
         </div>
     </form>
 
-    
+
 </div>

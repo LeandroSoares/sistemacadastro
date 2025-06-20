@@ -35,7 +35,7 @@ class SacredOrishaSeeder extends Seeder
                 'active' => true
             ],
             [
-                'name' => 'Oxmaré',
+                'name' => 'Oxumaré',
                 'description' => 'Orixá do arco-íris',
                 'is_right' => true,
                 'is_left' => false,

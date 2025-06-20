@@ -23,12 +23,17 @@ class OrishaController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'is_right' => 'required|boolean',
-            'is_left' => 'required|boolean',
-            'active' => 'required|boolean'
         ]);
 
-        Orisha::create($validated);
+        $data = [
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'is_right' => $request->boolean('is_right'),
+            'is_left' => $request->boolean('is_left'),
+            'active' => $request->boolean('active'),
+        ];
+
+        Orisha::create($data);
 
         return redirect()->route('orishas.index')
             ->with('success', 'Orixá criado com sucesso.');
@@ -44,12 +49,17 @@ class OrishaController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'is_right' => 'required|boolean',
-            'is_left' => 'required|boolean',
-            'active' => 'required|boolean'
         ]);
 
-        $orisha->update($validated);
+        $data = [
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'is_right' => $request->boolean('is_right'),
+            'is_left' => $request->boolean('is_left'),
+            'active' => $request->boolean('active'),
+        ];
+
+        $orisha->update($data);
 
         return redirect()->route('orishas.index')
             ->with('success', 'Orixá atualizado com sucesso.');
