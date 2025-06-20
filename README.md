@@ -1,8 +1,12 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=LeandroSoares_sistemacadastro&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LeandroSoares_sistemacadastro)
-
 # Sistema de Cadastro
 
 Sistema de gerenciamento de cadastros para casa religiosa de umbanda. Fornece controle de membros, cursos, formações religiosas e informações pessoais.
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=LeandroSoares_sistemacadastro&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LeandroSoares_sistemacadastro)
+
+## Sobre o Projeto
+
+O Sistema de Cadastro é uma aplicação web desenvolvida com Laravel para gerenciar cadastros de membros de uma casa religiosa de umbanda. O sistema mantém registro detalhado de informações  religiosas, cursos e formações dos membros.
 
 ## Funcionalidades
 
@@ -15,11 +19,21 @@ Sistema de gerenciamento de cadastros para casa religiosa de umbanda. Fornece co
 - Controle de uploads para apostilas nos cursos
 - Exportação de usuários para formato Excel
 
+## Tecnologias Utilizadas
+
+- Laravel 10.x
+- PHP 8.2
+- MySQL / SQLite (testes)
+- Livewire 3
+- TailwindCSS
+- AlpineJS
+- SonarQube (análise de qualidade)
+
 ## Instalação
 
 ### Pré-requisitos
 
-- PHP >= 8.0
+- PHP >= 8.2
 - Composer
 - Node.js e npm
 - MySQL (produção) ou SQLite (testes/desenvolvimento)
@@ -54,7 +68,7 @@ Sistema de gerenciamento de cadastros para casa religiosa de umbanda. Fornece co
    php artisan migrate --seed
    ```
 
-   **Nota:** O seeder criará um usuário administrador usando a senha definida no `.env` ou uma senha aleatória segura (mostrada no log em ambiente de desenvolvimento).
+   > **Nota:** O seeder criará um usuário administrador usando a senha definida no `.env` ou uma senha aleatória segura (mostrada no log em ambiente de desenvolvimento).
 
 5. **Compile os assets**
    ```bash
@@ -81,7 +95,7 @@ Para gerar relatório de cobertura de código:
 XDEBUG_MODE=coverage php artisan test --coverage
 ```
 
-**Nota:** A aplicação está configurada para desabilitar o Vite durante os testes automatizados, evitando erros relacionados ao manifesto do Vite.
+> **Nota:** A aplicação está configurada para desabilitar o Vite durante os testes automatizados, evitando erros relacionados ao manifesto do Vite.
 
 ## Estrutura do Sistema
 
@@ -95,86 +109,41 @@ XDEBUG_MODE=coverage php artisan test --coverage
 
 ### Níveis de Usuários
 
-#### Usuário Comum
-- Visualiza e edita apenas seus próprios dados
-- Acesso limitado às funcionalidades pessoais
-- Sem acesso às informações de outros membros
+- **Usuário Comum**
+  - Visualiza e edita apenas seus próprios dados
+  - Acesso limitado às funcionalidades pessoais
+  - Sem acesso às informações de outros membros
 
-#### Gerente
-- Gerencia recursos sob sua responsabilidade
-- Cadastra, edita e remove registros de sua área
-- Visualiza relatórios restritos ao seu escopo
-- Sem acesso às configurações globais
+- **Gerente**
+  - Gerencia recursos sob sua responsabilidade
+  - Cadastra, edita e remove registros de sua área
+  - Visualiza relatórios restritos ao seu escopo
+  - Sem acesso às configurações globais
 
-#### Administrador
-- Controle total do sistema
-- Cria, edita e remove qualquer usuário
-- Acessa todas configurações e relatórios
-- Gerencia permissões, visualiza logs e auditoria
+- **Administrador**
+  - Controle total do sistema
+  - Cria, edita e remove qualquer usuário
+  - Acessa todas configurações e relatórios
 
-## Boas Práticas e Segurança
+## Padrões de Desenvolvimento
 
-- **Controle de Acesso:** Utiliza Spatie Laravel Permission com roles e permissões
-- **Proteção de Dados:** Policies protegem o acesso aos recursos
-- **Validação Robusta:** Validação de dados no backend para todos componentes Livewire
-- **Configuração Segura:** Variáveis sensíveis apenas via `.env`
-- **Testes Automatizados:** Cobertura de testes com PHPUnit/Pest (meta: 80%+)
-- **CI/CD:** Integração contínua com GitHub Actions e análise SonarQube
+### Convenções de Commits
 
-## Implantação em Produção
+O projeto utiliza um template de commit padronizado. Configure-o com:
 
-### Via SSH/CLI (Recomendado)
+```bash
+git config --local commit.template .gitmessage
+```
 
-1. **Clone e configure**
-   ```bash
-   git clone https://github.com/LeandroSoares/sistemacadastro.git
-   cd sistemacadastro
-   composer install --no-dev --optimize-autoloader
-   cp .env.example .env
-   # Configure o .env para produção
-   php artisan key:generate
-   ```
+Estrutura básica dos commits:
+```
+[tipo]: resumo conciso
 
-2. **Otimize para produção**
-   ```bash
-   php artisan config:cache
-   php artisan route:cache
-   php artisan view:cache
-   php artisan migrate --force
-   ```
+Corpo explicativo detalhado (opcional)
+```
 
-3. **Configure o webserver**
-   - Aponte o documento root para a pasta `/public`
-   - Configure HTTPS com um certificado válido
-
-### Via FTP e phpMyAdmin
-
-1. **Upload dos arquivos**
-   - Envie todos arquivos via FTP, incluindo pastas ocultas
-   - Configure permissões: `775` para `storage` e `bootstrap/cache`
-
-2. **Configure o banco de dados**
-   - Crie um banco MySQL via phpMyAdmin
-   - Configure o `.env` com as credenciais corretas
-   - Importe a estrutura ou execute migrations via SSH se possível
-
-3. **Gere a chave da aplicação**
-   - Se tiver acesso SSH: `php artisan key:generate`
-   - Sem SSH: gere a chave localmente e adicione ao `.env`
-
-4. **Segurança**
-   - Remova arquivos de instalação e testes do servidor
-   - Proteja o `.env` de acessos externos
-   - Sempre utilize HTTPS em produção
-
-## Contribuição
-
-1. Fork o repositório
-2. Crie sua branch: `git checkout -b feature/nova-funcionalidade`
-3. Commit suas alterações: `git commit -m 'Adiciona nova funcionalidade'`
-4. Push para a branch: `git push origin feature/nova-funcionalidade`
-5. Abra um Pull Request
+Tipos comuns: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `ci`.
 
 ## Licença
 
-Este projeto está licenciado sob [MIT License](LICENSE).
+Este projeto está sob licença MIT.
