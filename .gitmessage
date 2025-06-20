@@ -1,0 +1,26 @@
+# [tipo]: resumo conciso (máx. 50 chars)
+
+# Corpo explicativo (opcional, máx. 72 chars por linha)
+# Explique o QUE e POR QUE, não o COMO
+
+# Tipos recomendados:
+# feat:     nova funcionalidade
+# fix:      correção de bug
+# docs:     alteração em documentação
+# style:    formatação de código
+# refactor: refatoração que não altera funcionalidade
+# perf:     melhoria de performance
+# test:     adição ou correção de testes
+# chore:    manutenção de build, deps, etc
+# ci:       alterações em configurações de CI
+
+# --- GUIA DE COMMITS ---
+# 1. Use linguagem em português
+# 2. Use verbos no presente/imperativo
+# 3. Primeira linha é resumo obrigatório
+# 4. Linha em branco após resumo
+# 5. Referencias (#issue, [docs])
+
+# Referências (opcional):
+# Closes #123
+# Veja também: link

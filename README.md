@@ -1,181 +1,180 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=LeandroSoares_sistemacadastro&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LeandroSoares_sistemacadastro)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Sistema de Cadastro
 
-# Manual de Instalação
+Sistema de gerenciamento de cadastros para casa religiosa de umbanda. Fornece controle de membros, cursos, formações religiosas e informações pessoais.
 
-1. **Pré-requisitos**  
-   - PHP >= 8.0  
-   - Composer  
-   - Node.js e npm  
-   - MySQL (produção) ou SQLite (testes/CI)
+## Funcionalidades
 
-2. **Clonar o repositório**
+- Cadastro e gerenciamento de usuários com diferentes níveis de permissão
+- Gestão de informações religiosas e pessoais
+- Registro de formações sacerdotais e cursos
+- Controle de orixás de cabeça e iniciados
+- Progressão detalhada do perfil dos membros
+- Suporte a múltiplos idiomas (pt-BR padrão)
+- Controle de uploads para apostilas nos cursos
+- Exportação de usuários para formato Excel
+
+## Instalação
+
+### Pré-requisitos
+
+- PHP >= 8.0
+- Composer
+- Node.js e npm
+- MySQL (produção) ou SQLite (testes/desenvolvimento)
+
+### Instalação para Desenvolvimento
+
+1. **Clone o repositório**
    ```bash
-   git clone https://seurepositorio.git
-   cd sistema_iweoba
+   git clone https://github.com/LeandroSoares/sistemacadastro.git
+   cd sistemacadastro
    ```
 
-3. **Instalar dependências**
+2. **Instale as dependências**
    ```bash
    composer install
    npm install
    ```
 
-4. **Configurar variáveis de ambiente**
+3. **Configure o ambiente**
    ```bash
    cp .env.example .env
    php artisan key:generate
    ```
    
-   Edite o arquivo .env com as configurações do seu ambiente.
+   Edite o arquivo `.env` com:
+   - Configurações do banco de dados
+   - `ADMIN_PASSWORD=` (senha para o usuário administrador inicial)
+   - Outras variáveis específicas do ambiente
 
-5. **Executar migrations**
+4. **Execute as migrations e seeders**
    ```bash
-   php artisan migrate
+   php artisan migrate --seed
    ```
 
-6. **Popular o banco de dados (opcional)**
-   ```bash
-   php artisan db:seed
-   ```
+   **Nota:** O seeder criará um usuário administrador usando a senha definida no `.env` ou uma senha aleatória segura (mostrada no log em ambiente de desenvolvimento).
 
-7. **Compilar assets**
+5. **Compile os assets**
    ```bash
-   npm run dev   # para desenvolvimento
+   npm run dev   # para desenvolvimento com HMR
    npm run build # para produção
    ```
 
-8. **Executar servidor local**
+6. **Execute o servidor local**
    ```bash
    php artisan serve
    ```
+   
+   Acesse o sistema em [http://localhost:8000](http://localhost:8000)
 
-# Testes
+## Testes
 
 Execute os testes com:
 ```bash
 php artisan test
 ```
 
-Para obter relatório de cobertura de código:
+Para gerar relatório de cobertura de código:
 ```bash
-php artisan test --coverage
+XDEBUG_MODE=coverage php artisan test --coverage
 ```
 
-**Nota sobre testes:** A aplicação está configurada para desabilitar o Vite durante os testes automatizados. Isso evita erros relacionados ao manifesto do Vite, já que os testes não necessitam de assets front-end compilados. Esta configuração está implementada no arquivo `tests/TestCase.php`.
-   cp .env.example .env
-   ```
-   Edite o arquivo `.env` conforme necessário (DB_HOST, DB_USERNAME, DB_PASSWORD, etc). Nunca versionar `.env`.
+**Nota:** A aplicação está configurada para desabilitar o Vite durante os testes automatizados, evitando erros relacionados ao manifesto do Vite.
 
-5. **Gerar chave da aplicação**
+## Estrutura do Sistema
+
+### Módulos Principais
+
+- **Dados Pessoais:** Gestão de informações básicas dos membros
+- **Informações Religiosas:** Registro de dados relacionados à prática religiosa
+- **Formação Sacerdotal:** Controle de formação e evolução espiritual
+- **Orixás e Entidades:** Cadastro e gerenciamento de orixás de cabeça e iniciados
+- **Cursos e Formações:** Registro de cursos e encontros realizados
+
+### Níveis de Usuários
+
+#### Usuário Comum
+- Visualiza e edita apenas seus próprios dados
+- Acesso limitado às funcionalidades pessoais
+- Sem acesso às informações de outros membros
+
+#### Gerente
+- Gerencia recursos sob sua responsabilidade
+- Cadastra, edita e remove registros de sua área
+- Visualiza relatórios restritos ao seu escopo
+- Sem acesso às configurações globais
+
+#### Administrador
+- Controle total do sistema
+- Cria, edita e remove qualquer usuário
+- Acessa todas configurações e relatórios
+- Gerencia permissões, visualiza logs e auditoria
+
+## Boas Práticas e Segurança
+
+- **Controle de Acesso:** Utiliza Spatie Laravel Permission com roles e permissões
+- **Proteção de Dados:** Policies protegem o acesso aos recursos
+- **Validação Robusta:** Validação de dados no backend para todos componentes Livewire
+- **Configuração Segura:** Variáveis sensíveis apenas via `.env`
+- **Testes Automatizados:** Cobertura de testes com PHPUnit/Pest (meta: 80%+)
+- **CI/CD:** Integração contínua com GitHub Actions e análise SonarQube
+
+## Implantação em Produção
+
+### Via SSH/CLI (Recomendado)
+
+1. **Clone e configure**
    ```bash
+   git clone https://github.com/LeandroSoares/sistemacadastro.git
+   cd sistemacadastro
+   composer install --no-dev --optimize-autoloader
+   cp .env.example .env
+   # Configure o .env para produção
    php artisan key:generate
    ```
 
-6. **Migrar e popular o banco de dados**
+2. **Otimize para produção**
    ```bash
-   php artisan migrate --seed
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   php artisan migrate --force
    ```
 
-7. **Iniciar o servidor**
-   ```bash
-   php artisan serve
-   ```
+3. **Configure o webserver**
+   - Aponte o documento root para a pasta `/public`
+   - Configure HTTPS com um certificado válido
 
-8. **Compilar assets frontend (opcional)**
-   ```bash
-   npm run dev
-   ```
-
----
-
-# Boas Práticas e Segurança
-
-- Utilize policies para proteger recursos sensíveis.
-- Use o pacote Spatie Laravel Permission para controle de acesso.
-- Sempre utilize migrations, seeders e factories para manter o banco consistente.
-- Configure variáveis sensíveis apenas via `.env`.
-- Utilize Livewire para componentes reativos, sempre validando dados no backend.
-- Implemente testes automatizados (Pest/PHPUnit) e mantenha boa cobertura.
-- Use CI/CD (GitHub Actions) e SonarQube para garantir qualidade e segurança contínua.
-
-# Manual dos Níveis de Usuário
-
-## Gerente
-- Visualiza e gerencia recursos sob sua responsabilidade.
-- Pode cadastrar, editar e remover registros de sua área.
-- Não possui acesso a configurações globais do sistema.
-- Gerenciamento de equipes/setores, relatórios restritos ao seu escopo, aprovação de solicitações dentro do seu nível.
-
-## Admin
-- Controle total do sistema.
-- Pode criar, editar e remover qualquer usuário, incluindo outros admins e gerentes.
-- Acesso a todas as configurações e relatórios.
-- Gerenciamento global de permissões e configurações, visualização de todos os dados do sistema, auditoria e logs de atividades.
-
----
-
-## Sobre o Laravel
-
-Este projeto utiliza o framework Laravel. Para mais informações, consulte a [documentação oficial](https://laravel.com/docs).
-
-
-## Preparação para instalação via FTP e phpMyAdmin
+### Via FTP e phpMyAdmin
 
 1. **Upload dos arquivos**
-   - Faça upload de todos os arquivos e pastas do projeto para o servidor usando um cliente FTP (ex: FileZilla).
-   - Certifique-se de enviar inclusive as pastas ocultas (ex: `.env.example`, `.htaccess` se houver).
+   - Envie todos arquivos via FTP, incluindo pastas ocultas
+   - Configure permissões: `775` para `storage` e `bootstrap/cache`
 
-2. **Permissões de pastas**
-   - No servidor, garanta que as pastas `storage` e `bootstrap/cache` tenham permissão de escrita (recomendado: 775 ou 777 apenas se necessário).
+2. **Configure o banco de dados**
+   - Crie um banco MySQL via phpMyAdmin
+   - Configure o `.env` com as credenciais corretas
+   - Importe a estrutura ou execute migrations via SSH se possível
 
-3. **Configuração do banco de dados**
-   - Crie um banco de dados MySQL via painel de controle ou phpMyAdmin.
-   - Importe o arquivo de estrutura do banco (dump `.sql` se disponível) via phpMyAdmin, ou execute as migrations pelo terminal se possível.
+3. **Gere a chave da aplicação**
+   - Se tiver acesso SSH: `php artisan key:generate`
+   - Sem SSH: gere a chave localmente e adicione ao `.env`
 
-4. **Configuração do arquivo `.env`**
-   - Renomeie `.env.example` para `.env`.
-   - Edite o `.env` com as credenciais do banco de dados, URL do site e outras variáveis sensíveis:
-     ```env
-     APP_ENV=production
-     APP_KEY= # gere uma chave com `php artisan key:generate` e cole aqui
-     APP_URL=https://seudominio.com.br
-     DB_CONNECTION=mysql
-     DB_HOST=localhost
-     DB_PORT=3306
-     DB_DATABASE=nome_do_banco
-     DB_USERNAME=usuario
-     DB_PASSWORD=senha
-     ```
-   - **Nunca** envie o `.env` para repositórios públicos.
+4. **Segurança**
+   - Remova arquivos de instalação e testes do servidor
+   - Proteja o `.env` de acessos externos
+   - Sempre utilize HTTPS em produção
 
-5. **Gerar chave da aplicação**
-   - Se tiver acesso SSH, execute:
-     ```bash
-     php artisan key:generate
-     ```
-   - Se não tiver SSH, gere a chave localmente e cole no `.env` do servidor.
+## Contribuição
 
-6. **Configuração de cache e otimização**
-   - Se possível, rode:
-     ```bash
-     php artisan config:cache
-     php artisan route:cache
-     php artisan view:cache
-     ```
-   - Isso melhora a performance em produção.
+1. Fork o repositório
+2. Crie sua branch: `git checkout -b feature/nova-funcionalidade`
+3. Commit suas alterações: `git commit -m 'Adiciona nova funcionalidade'`
+4. Push para a branch: `git push origin feature/nova-funcionalidade`
+5. Abra um Pull Request
 
-7. **Acesso ao sistema**
-   - Acesse pelo navegador o domínio configurado.
-   - O primeiro usuário admin pode ser criado via seeder ou diretamente no banco, conforme instruções do projeto.
+## Licença
 
-8. **Segurança**
-   - Remova arquivos de instalação, dumps e scripts de teste do servidor após a configuração.
-   - Mantenha o `.env` protegido e nunca versionado.
-   - Sempre utilize HTTPS em produção.
+Este projeto está licenciado sob [MIT License](LICENSE).
