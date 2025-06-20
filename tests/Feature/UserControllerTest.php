@@ -1,0 +1,296 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+class UserControllerTest extends TestCase
+{
+    use RefreshDatabase;
+    use WithFaker;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Criar os papéis necessários
+        $adminRole = Role::create(['name' => 'admin']);
+        Role::create(['name' => 'manager']);
+        Role::create(['name' => 'user']);
+
+        // Criar permissões
+        $permissions = [
+            'view users',
+            'create users',
+            'edit users',
+            'delete users',
+            'view courses',
+            'create courses',
+            'edit courses',
+            'delete courses',
+            'view orishas',
+            'create orishas',
+            'edit orishas',
+            'delete orishas'
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        // Atribuir todas as permissões ao papel de admin
+        $adminRole->givePermissionTo($permissions);
+    }
+
+    #[Test]
+    public function index_displays_users()
+    {
+        // Criar usuários de teste
+        $admin = User::factory()->create(['name' => 'Admin User']);
+        $admin->assignRole('admin');
+
+        $regularUser = User::factory()->create(['name' => 'Regular User']);
+        $regularUser->assignRole('user');
+
+        // Acessar a página de índice como admin
+        $this->actingAs($admin);
+        $response = $this->get(route('users.index'));
+
+        // Verificar se a resposta é bem-sucedida e contém os usuários
+        $response->assertStatus(200);
+        $response->assertViewIs('users.index');
+        $response->assertViewHas('users');
+        $response->assertSee('Admin User');
+        $response->assertSee('Regular User');
+    }
+
+    #[Test]
+    public function index_respects_search_parameter()
+    {
+        // Criar usuários de teste com nomes específicos
+        $admin = User::factory()->create(['name' => 'Admin Test']);
+        $admin->assignRole('admin');
+
+        User::factory()->create(['name' => 'John Doe']);
+        User::factory()->create(['name' => 'Jane Smith']);
+
+        // Acessar a página de índice com parâmetro de pesquisa
+        $this->actingAs($admin);
+        $response = $this->get(route('users.index', ['search' => 'John']));
+
+        // Verificar se a pesquisa funcionou corretamente
+        $response->assertStatus(200);
+        $response->assertSee('John Doe');
+
+        // O teste não pode verificar se Jane Smith não aparece porque a busca é feita pelo Livewire
+        // e o HTML retornado contém todos os usuários antes que o JS seja executado
+    }
+
+    #[Test]
+    public function non_admin_cannot_access_users_index()
+    {
+        // Criar usuário regular
+        $user = User::factory()->create();
+        $user->assignRole('user');
+
+        // Tentar acessar como usuário regular
+        $this->actingAs($user);
+        $response = $this->get(route('users.index'));
+
+        // Verificar se o acesso é negado
+        $response->assertStatus(403);
+    }
+
+    #[Test]
+    public function create_displays_user_creation_form()
+    {
+        // Criar admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        $this->actingAs($admin);
+        $response = $this->get(route('users.create'));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('users.create');
+    }
+
+    #[Test]
+    public function store_method_returns_404()
+    {
+        // Criar admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        // Tentar criar usuário via método store (que deve retornar 404)
+        $this->actingAs($admin);
+        $response = $this->post(route('users.store'), [
+            'name' => 'New User',
+            'email' => 'newuser@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ]);
+
+        $response->assertStatus(404);
+    }
+
+    #[Test]
+    public function edit_displays_user_edit_form()
+    {
+        // Criar admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        // Criar usuário para editar
+        $userToEdit = User::factory()->create(['name' => 'User To Edit']);
+
+        $this->actingAs($admin);
+        $response = $this->get(route('users.edit', $userToEdit));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('users.edit');
+        $response->assertViewHas('user', $userToEdit);
+        $response->assertSee('User To Edit');
+    }
+
+    #[Test]
+    public function update_changes_user_data()
+    {
+        // Criar admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        // Criar usuário para atualizar
+        $userToUpdate = User::factory()->create([
+            'name' => 'Original Name',
+            'email' => 'original@example.com'
+        ]);
+        $userToUpdate->assignRole('user');
+
+        // Obter o role 'user' diretamente pelo nome em vez de usar o ID
+        $userRole = Role::findByName('user');
+
+        $this->actingAs($admin);
+        $response = $this->put(route('users.update', $userToUpdate), [
+            'name' => 'Updated Name',
+            'email' => 'updated@example.com',
+            'roles' => [$userRole->id]
+        ]);
+
+        $response->assertRedirect(route('users.index'));
+        $response->assertSessionHas('success', 'Usuário atualizado com sucesso!');
+
+        $this->assertDatabaseHas('users', [
+            'id' => $userToUpdate->id,
+            'name' => 'Updated Name',
+            'email' => 'updated@example.com',
+        ]);
+    }
+
+    #[Test]
+    public function update_with_password_updates_password()
+    {
+        // Criar admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        // Criar usuário para atualizar
+        $userToUpdate = User::factory()->create([
+            'name' => 'Password Test',
+            'email' => 'password@example.com'
+        ]);
+
+        $oldPasswordHash = $userToUpdate->password;
+
+        $this->actingAs($admin);
+        $response = $this->put(route('users.update', $userToUpdate), [
+            'name' => 'Password Test',
+            'email' => 'password@example.com',
+            'password' => 'newpassword123',
+            'password_confirmation' => 'newpassword123'
+        ]);
+
+        $response->assertRedirect(route('users.index'));
+
+        $userToUpdate->refresh();
+        $this->assertNotEquals($oldPasswordHash, $userToUpdate->password);
+    }
+
+    #[Test]
+    public function update_validates_input()
+    {
+        // Criar admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        // Criar usuário para atualizar
+        $userToUpdate = User::factory()->create();
+
+        // Testar validação de email
+        $this->actingAs($admin);
+        $response = $this->put(route('users.update', $userToUpdate), [
+            'name' => 'Test Name',
+            'email' => 'invalid-email'
+        ]);
+
+        $response->assertSessionHasErrors('email');
+
+        // Testa confirmação de senha
+        $response = $this->put(route('users.update', $userToUpdate), [
+            'name' => 'Test Name',
+            'email' => 'valid@example.com',
+            'password' => 'password123',
+            'password_confirmation' => 'different-password'
+        ]);
+
+        $response->assertSessionHasErrors('password');
+    }
+
+    #[Test]
+    public function destroy_deletes_user()
+    {
+        // Criar admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        // Criar usuário para excluir
+        $userToDelete = User::factory()->create();
+        $userToDelete->assignRole('user');
+
+        $this->actingAs($admin);
+
+        $response = $this->delete(route('users.destroy', $userToDelete));
+
+        $response->assertRedirect(route('users.index'));
+        $response->assertSessionHas('success', 'Usuário excluído com sucesso!');
+
+        $this->assertDatabaseMissing('users', ['id' => $userToDelete->id]);
+    }
+
+    #[Test]
+    public function cannot_delete_admin_user()
+    {
+        // Criar um admin
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        // Criar outro admin para tentar excluir
+        $anotherAdmin = User::factory()->create();
+        $anotherAdmin->assignRole('admin');
+
+        $this->actingAs($admin);
+
+        $response = $this->delete(route('users.destroy', $anotherAdmin));
+
+        $response->assertRedirect(route('users.index'));
+        $response->assertSessionHas('error', 'Não é permitido excluir um administrador.');
+
+        $this->assertDatabaseHas('users', ['id' => $anotherAdmin->id]);
+    }
+}

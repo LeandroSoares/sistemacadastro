@@ -44,6 +44,13 @@ class LastTempleForm extends Component
     {
         $validatedData = $this->validate();
 
+        // Converter strings vazias em null
+        foreach ($validatedData as $key => $value) {
+            if ($value === '') {
+                $validatedData[$key] = null;
+            }
+        }
+
         $this->user->lastTemple()->updateOrCreate(
             ['user_id' => $this->user->id],
             $validatedData

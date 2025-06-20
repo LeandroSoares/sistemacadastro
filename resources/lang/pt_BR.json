@@ -53,7 +53,7 @@
     "forceCross": "Cruz de Força",
     "front_orisha": "Orixá de Frente",
     "function": "Função",
-    "home": "Home",
+    "home": "Início",
     "headOrisha": "Orixá de Cabeça",
     "incident_contact_name": "Contato em caso de emergência",
     "incident_contact_number": "Telefone de contato em caso de emergência",
@@ -66,7 +66,7 @@
     "left_side_orisha": "Orixá lado esquerdo",
     "left": "Esquerdo",
     "marinheiro": "Marinheiro",
-    "meus-dados": "Meus dados",
+    "meus-dados": "Meus Dados",
     "name": "nome",
     "Name": "Nome",
     "no": "não",
@@ -104,6 +104,7 @@
     "umbanda_start_location": "Local de início na Umbanda",
     "Update Password": "Atualizar senha",
     "users.index": "Usuários",
+    "home": "Início",
     "walking_together_orishas": "Orixás que andam junto",
     "was_cambone": "Você foi cambone?",
     "Welcome to our application": "Bem-vindo à nossa aplicação",
@@ -152,5 +153,7 @@
     "Course updated successfully!": "Curso atualizado com sucesso!",
     "You do not have permission to manage courses.": "Você não tem permissão para gerenciar cursos.",
     "The course name is required": "O nome do curso é obrigatório",
-    "The course name cannot be longer than 255 characters": "O nome do curso não pode ter mais de 255 caracteres"
+    "The course name cannot be longer than 255 characters": "O nome do curso não pode ter mais de 255 caracteres",
+    "Profile": "Perfil",
+    "Log Out": "Sair"
 }

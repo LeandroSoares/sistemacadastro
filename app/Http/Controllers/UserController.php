@@ -57,21 +57,46 @@ class UserController extends Controller
             'email' => $validated['email']
         ];
 
-        if ($validated['password']) {
+        if (isset($validated['password']) && $validated['password']) {
             $userData['password'] = bcrypt($validated['password']);
         }
 
         $user->update($userData);
 
+        // Atualizar as funções do usuário se forem fornecidas
         if (isset($validated['roles'])) {
-            // Apenas admin pode modificar função de admin
+            $currentUser = Auth::user();
             $roles = collect($validated['roles']);
-            if (!$user->hasRole('admin')) {
-                $roles = $roles->reject(function ($role) {
-                    return Role::find($role)->name === 'admin';
-                });
+
+            // Garantir que apenas IDs de roles válidos sejam considerados
+            $validRoles = $roles->filter(function ($roleId) {
+                return Role::find($roleId) !== null;
+            });
+
+            // Verificar se o usuário atual tem permissão para modificar o papel de admin
+            $adminRole = Role::findByName('admin');
+            $wasAdmin = $user->hasRole('admin');
+            $willBeAdmin = $validRoles->contains($adminRole->id);
+
+            // Se não for admin e estiver tentando adicionar/remover o papel de admin
+            if ($wasAdmin != $willBeAdmin && !$currentUser->hasRole('admin')) {
+                // Manter o status admin anterior se o usuário atual não for admin
+                if ($wasAdmin) {
+                    $validRoles->push($adminRole->id);
+                } else {
+                    $validRoles = $validRoles->reject(function ($roleId) use ($adminRole) {
+                        return $roleId == $adminRole->id;
+                    });
+                }
             }
-            $user->syncRoles($roles);
+
+            // Sempre garantir que o usuário tenha a função 'user'
+            $userRole = Role::findByName('user');
+            if (!$validRoles->contains($userRole->id)) {
+                $validRoles->push($userRole->id);
+            }
+
+            $user->syncRoles($validRoles->toArray());
         }
 
         return redirect()->route('users.index')

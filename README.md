@@ -30,6 +30,46 @@
 4. **Configurar variáveis de ambiente**
    ```bash
    cp .env.example .env
+   php artisan key:generate
+   ```
+   
+   Edite o arquivo .env com as configurações do seu ambiente.
+
+5. **Executar migrations**
+   ```bash
+   php artisan migrate
+   ```
+
+6. **Popular o banco de dados (opcional)**
+   ```bash
+   php artisan db:seed
+   ```
+
+7. **Compilar assets**
+   ```bash
+   npm run dev   # para desenvolvimento
+   npm run build # para produção
+   ```
+
+8. **Executar servidor local**
+   ```bash
+   php artisan serve
+   ```
+
+# Testes
+
+Execute os testes com:
+```bash
+php artisan test
+```
+
+Para obter relatório de cobertura de código:
+```bash
+php artisan test --coverage
+```
+
+**Nota sobre testes:** A aplicação está configurada para desabilitar o Vite durante os testes automatizados. Isso evita erros relacionados ao manifesto do Vite, já que os testes não necessitam de assets front-end compilados. Esta configuração está implementada no arquivo `tests/TestCase.php`.
+   cp .env.example .env
    ```
    Edite o arquivo `.env` conforme necessário (DB_HOST, DB_USERNAME, DB_PASSWORD, etc). Nunca versionar `.env`.
 

@@ -76,9 +76,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Contato de Emergência</label>
-                <input type="text"
-                x-mask="(99) 99999-9999 | Nome: *********************************************************"
-                wire:model="emergency_contact" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <input type="text" wire:model="emergency_contact" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                 @error('emergency_contact') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
         </div>
