@@ -24,6 +24,56 @@
 14. [ ] Permitir upload de fotos e arquivos (ex: apostilas nos cursos)
 15. [ ] Exportar usuários cadastrados para Excel ou arquivo externo
 
+Claro! Segue uma versão revisada, organizada e refatorada da especificação do módulo de cursos, incluindo sugestões para facilitar manutenção e evolução do sistema.
+
+---
+
+## Módulo de Cursos
+
+### Regras de Negócio
+
+#### 1. Listagem de Cursos
+- A página principal de cursos exibe todos os cursos cadastrados no sistema.
+- Ao lado do nome de cada curso, há um botão **"Inscrever-se"**.
+
+#### 2. Inscrição em Cursos
+- Ao clicar em **"Inscrever-se"**, o usuário é redirecionado para a página de inscrição do respectivo curso.
+- Na página de inscrição, o usuário visualiza os detalhes do curso (nome, descrição, data de início, data de término, etc).
+- O usuário pode confirmar a inscrição no curso.
+- Após a inscrição, o usuário é adicionado à lista de inscritos do curso.
+
+#### 3. Visualização de Cursos e Inscrições
+- O usuário pode visualizar:
+  - Detalhes completos do curso, incluindo lista de inscritos.
+  - Todos os cursos em que está inscrito, em uma área específica do sistema (ex: "Meus Cursos").
+- O usuário pode cancelar a inscrição em qualquer curso em que esteja inscrito.
+
+#### 4. Lista de Inscritos
+- A lista de inscritos de cada curso pode ser visualizada por usuários autorizados (definir regras de permissão, se necessário).
+
+#### 5. Criação e Gestão de Cursos
+- Deve ser possível criar um novo curso a partir do zero.
+- Deve ser possível criar um novo curso como **cópia** de um curso já existente (incluindo a possibilidade de alterar dados, como datas e descrição, antes de salvar).
+- Recomenda-se criar um novo curso a cada edição (exemplo: cursos anuais), para facilitar o gerenciamento, controle de inscrições e histórico.  
+  - **Justificativa:** Evita aumento desnecessário de complexidade no desenvolvimento e manutenção, além de preservar o histórico de cada edição.
+
+---
+
+### Sugestões de Melhoria
+
+- **Histórico de Edições:** Permitir visualizar edições passadas de um mesmo curso, mantendo o histórico de inscrições e detalhes.
+- **Permissões:** Definir claramente quem pode criar, editar, copiar cursos e visualizar listas de inscritos.
+- **Notificações:** Enviar notificações para usuários inscritos em caso de alterações importantes no curso (opcional).
+- **Filtros e Busca:** Permitir busca e filtros na listagem de cursos (por nome, status, data, etc).
+
+---
+
+### Fluxos Principais
+
+1. **Usuário acessa a página de cursos → visualiza lista → clica em "Inscrever-se" → visualiza detalhes → confirma inscrição → aparece em "Meus Cursos".**
+2. **Usuário acessa "Meus Cursos" → visualiza detalhes → pode cancelar inscrição.**
+3. **Administrador acessa gestão de cursos → pode criar novo curso (do zero ou como cópia) → define detalhes → curso fica disponível para inscrições.**
+ 
 ---
 
 Este backlog foi gerado a partir de feedbacks reais de usuários e deve ser utilizado como base para priorização e planejamento das próximas sprints.
